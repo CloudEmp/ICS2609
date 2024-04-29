@@ -1,0 +1,307 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 04 29, 24, 4:16:14 PM
+    Author     : Micah
+*/
+
+        body {
+            margin: 0;
+            font-family: "Century Gothic";
+            background-color: white;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        .bg {
+            position: fixed;
+            background-image: url('../images/albg2.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            width: 100%;
+            height: 100%;
+            margin-top: 15px;
+            margin-left: 250px;
+            box-shadow: inset 10px 4px 7px 0 rgba(0, 0, 0, 0.25);
+            z-index: -1;
+        }
+        
+        .al {
+            width: 377px;
+            height: 67px;
+            margin: 15px 103px 0 30px;
+            font-family: "Century Gothic";
+            font-size: 40px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: #fff;
+            z-index: 1; 
+          }
+          
+        .my-course-box {
+            position: fixed;
+            width: 200px;
+            height: 55px;
+            margin: -35px 539px 857px 240px;
+            border-radius: 15px;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+            border: solid 1px #000;
+            background-color: #1E293B;  
+            z-index: -2;
+        }
+        
+        .mycourses-text {
+            position: fixed;
+            width: 200px;
+            height: 50px;
+            margin: -25px 539px 857px 245px;
+            font-family: "Century Gothic";
+            font-size: 22px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+        
+        .enrollment-box {
+            position: fixed;
+            width: 200px;
+            height: 55px;
+            margin: -35px 539px 857px 415px;
+            border-radius: 15px;
+            background-color: rgba(30, 41, 59, 0.66);
+            z-index: -2;
+        }
+        
+        .enrollment-text {
+            position: fixed;
+            width: 200px;
+            height: 50px;
+            margin: -25px 539px 857px 415px;
+            font-family: "Century Gothic";
+            font-size: 22px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #fff;
+        }
+          
+        .my-course-button:hover .mycourses-text,
+        .enrollment-button:hover .enrollment-text {
+            color: #A8BCDD;
+            opacity: 0.3;
+            transition: color 0.3s ease, opacity 0.3s ease;       
+        }
+
+        .cover {
+            position: fixed;
+            background-image: url('../images/cover.png');
+            background-size: 309px 248px;
+            width: 309px;
+            height: 248px;
+            margin: -150px 103px 0 -58px;
+            border-radius: 25px;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+            z-index: -1;
+        }
+        
+        .profile {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+        }
+        
+        .profile img {
+            position: fixed;
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            border: solid 10px #1e293b;
+            margin: 15px 103px 0 50px;
+        }
+        
+        .hello {
+            position: fixed;
+            color: #1e293b;
+            font-size: 30px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            font-family: "Century Gothic";
+            margin: 160px 103px 0 50px;
+        }
+        
+        .role {
+            position: fixed;
+            color: rgba(30, 41, 59, 0.5);
+            font-size: 25px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            font-family: "Century Gothic";
+            margin: 200px 103px 0 100px;
+        }
+        
+        .line {
+            width: 200px;
+            height: 1px;
+            background-color: #9c9a9a;
+            margin: 250px 103px 0 25px;
+        }
+        
+        .logout-box {
+            position: fixed;
+            width: 250px;
+            height: 65px;
+            margin-top: 60px;
+            margin-left: -0.5px;
+            border-radius: 20px;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+            border: solid 1px #000;
+            background-color: #1E293B;
+        }
+        
+        .logout-text {
+            position: fixed;
+            width: 200px;
+            height: 50px;
+            margin-top: 73px;
+            margin-left: 23px;
+            font-family: "Century Gothic";
+            font-size: 20px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+         .logout-button:hover .logout-text {
+            color: #A8BCDD;
+            opacity: 0.5; 
+        }
+        
+        .navbar-item {
+            display: flex;
+            align-items: center;
+            margin-top: 50px; 
+        }
+
+        .navbar-item a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #1e293b;
+            margin-top: -10px;
+            margin-left: 40px; 
+            text-decoration: underline;
+        }
+
+        .navbar-item img {
+            width: 30px; 
+            height: auto; 
+            margin-right: 10px; 
+        }
+
+        .navbar-item-text {
+            position: fixed;
+            font-family: "Century Gothic";
+            font-size: 18px;;
+            font-style: italic;
+            text-align: left;
+        }
+        
+        a:hover {
+            color: #A8BCDD;
+        }
+        
+        .gc-container-1 {
+            position: fixed;
+            width: 250px;
+            height: 240px;
+            margin: -450px 539px 857px 315px;
+            padding: 23px 21px 15px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+            background-color: #fff;
+            transition: transform 0.3s ease-in-out; 
+        }
+
+        .gc-container-1:hover {
+            transform: scale(1.10); 
+        }
+
+        .img-python,
+        .img-clock,
+        .gc-python,
+        .duration {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .img-python {
+            position: fixed;
+            width: 250px;
+            height: 170px;
+        }
+
+        .gc-python {
+            position: fixed;
+            width: 429px;
+            height: 72px;
+            margin: 180px 0 0 -100px;
+            font-family: "Century Gothic";
+            font-size: 18px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #1e293b;
+        }
+
+        .img-clock {
+            position: fixed;
+            width: 32px;
+            height: 29px;
+            margin: 215px 0 0 -10px;
+        }
+
+        .duration {
+            position: fixed;
+            width: 429px;
+            height: 72px;
+            margin: 220px 0 0 30px;
+            font-family: "Century Gothic";
+            font-size: 16px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: rgba(30, 41, 59, 0.51);
+        }
