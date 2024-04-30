@@ -1,0 +1,597 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 04 30, 24, 3:18:46 AM
+    Author     : Andrea
+*/
+
+
+* {
+    font-family: century gothic;
+}
+body {
+    position: fixed;
+    background-color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container1-course #image-con {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    background: white;
+
+    min-height: 100vh;
+}
+
+.container1-course #cover {
+    height: 180px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    background: white;
+    border-radius: 0 0 20px 0px;
+    z-index: 1;
+
+}
+
+.container1-course #profile {
+    position: fixed;
+    left: 50px;
+    top:  96px;
+    width: 140px;
+    height: 140px;
+    z-index: 1;
+
+}
+
+#line {
+    width: 200px;
+    height: 1px;
+    background-color: #9c9a9a;
+    position: fixed;
+
+    left: 24px;
+    top:  320px;
+
+}
+
+
+.container1-course #logout {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 61px;
+    background: #1E293B;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px black solid;
+    font-weight: 600;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#logout:hover {
+    background-color: #9F79C7;
+}
+
+.container2-course {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 1300px;
+    height: 95px;
+
+
+}
+
+.container2-course #courses{
+    position: fixed;
+    width: 240px;
+    height: 50px;
+    background: #6B717D;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px black solid;
+    top: 46px;
+    left: 240px;
+    font-weight: 600;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+
+}
+
+
+.container2-course #enroll{
+    position: fixed;
+    width: 280px;
+    height: 50px;
+    background: #1E293B;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px black solid;
+    top: 46px;
+    left: 420px;
+    z-index: -1;
+    font-weight: 600;
+    color: white;
+    font-size: 25px;
+    padding-left: 55px;
+    cursor: pointer;
+}
+
+#courses:hover {
+    background-color: #9F79C7;
+}
+
+
+
+#image-bg {
+    position: fixed;
+    top: 96px;
+    right: 0px;
+    left:0px;
+    bottom: 0px;
+    z-index: -1;
+    width: 2000px;
+    height: 906px;
+
+
+}
+
+
+#sites {
+    position: fixed;
+    width: 65px;
+    height: 53px;
+    left: 3px;
+    top: 0px;
+    position: absolute;
+}
+
+#label {
+    color: #1E293B;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    text-decoration: underline;
+    word-wrap: break-word
+}
+
+
+
+.con-item {
+    position: fixed;
+    top: 320px;
+}
+
+
+.navbar-item {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+
+}
+
+.navbar-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #1e293b;
+    margin-top: -10px;
+    margin-left: 40px;
+    text-decoration: underline;
+}
+
+.navbar-item img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.navbar-item-text {
+    position: fixed;
+    font-family: "Century Gothic";
+    font-size: 18px;
+    ;
+    font-style: italic;
+    text-align: left;
+}
+
+a:hover {
+    color: #A8BCDD;
+}
+
+
+.container2-course #download-record {
+    position: fixed;
+    top: 19px;
+    left: 1250px;
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 19px;
+    text-align: center;
+    width: 210px;
+    height: 57px;
+    background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 2px #1E293B solid;
+    cursor: pointer;
+
+
+}
+
+
+#download-record:hover {
+    background-color: #9F79C7;
+}
+
+
+#create-course {
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 19px;
+    text-align: center;
+    width: 160px;
+    height: 40px;
+    background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 2px #1E293B solid;
+    position: fixed;
+    top: 145px;
+    left: 1260px;
+    transition: all .5s ease;
+    text-align: center;
+    line-height: 1;
+    font-size: 17px;
+    background-color : transparent;
+    padding: 10px;
+    outline: none;
+    cursor: pointer;
+
+}
+
+#create-course:hover {
+    background-color: #73B6C4;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-image: url(images/classroom.png);
+    background-size: cover;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+.modal-content form {
+    margin-bottom: 20px;
+}
+
+.modal-content label {
+    font-size: 23px;
+    font-weight: bold;
+    color: #1E293B;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="date"] {
+    width: 75%;
+    height: 40px;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.modal-content button {
+    background-color: #1E293B;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 180px;
+    height: 50px;
+    font-size: 23px;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+
+.container3-course {
+    position: fixed;
+    width: 1095px;
+    height: 30px;
+    margin: 125px 0 10px 340px;
+    min-height: 100vh;
+    display: flex;
+
+
+}
+
+
+table, th, td, tr {
+    padding: 1rem;
+    border-collapse: collapse;
+    text-align: left;
+
+}
+
+main.table {
+    width: 85vw;
+    height: 73vh;
+    background-color: #fff;
+    border: solid 1px #000;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.table_body {
+    width: 95%;
+    max-height: calc(89% - .8rem);
+    margin: .8rem auto;
+    border-radius: .6rem;
+    overflow: auto;
+    margin-top: 60px;
+
+}
+
+.table_body::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.table_body::-webkit-scrollbar-thumb {
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table_body:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+table {
+    width: 100%;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+}
+
+th {
+    font-size: 17px;
+    font-style: italic;
+    border-bottom: solid 3px #1e293b;
+}
+
+td {
+    border-top: solid 1px #9C9A9A;
+    border-bottom: solid 1px #9C9A9A;
+}
+
+tbody tr:hover {
+    background-color: #0000000b;
+}
+
+@media (max-width:1000px) {
+    td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}
+
+
+.al {
+    width: 377px;
+    height: 67px;
+    margin: 7px 103px 0 22px;
+    font-family: "Century Gothic";
+    font-size: 40px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #fff;
+    z-index: 2;
+}
+
+
+
+.hello {
+    position: fixed;
+    color: #1e293b;
+    font-size: 27px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    margin: 0;
+    top: 245px;
+}
+
+.role {
+    position: fixed;
+    color: rgba(30, 41, 59, 0.5);
+    font-size: 23px;
+    top: 277px;
+
+}
+
+
+
+.container-course {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    height: 0px;
+}
+
+
+
+/* download record jsp */
+
+#own-record {
+
+    position: fixed;
+    top: 125px;
+    left: 510px;
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 19px;
+    text-align: center;
+    width: 240px;
+    height: 57px;
+    background: transparent;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 2px #1E293B solid;
+    cursor: pointer;
+
+}
+
+#all-record {
+
+    position: fixed;
+    top: 125px;
+    left: 797px;
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 19px;
+    text-align: center;
+    width: 210px;
+    height: 57px;
+    background: transparent;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 2px #1E293B solid;
+    cursor: pointer;
+}
+
+#course-record {
+
+    position: fixed;
+    top: 125px;
+    left: 1050px;
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 19px;
+    text-align: center;
+    width: 210px;
+    height: 57px;
+    background: transparent;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 2px #1E293B solid;
+    cursor: pointer;
+}
+
+.print-container {
+    width: 800px;
+    height: 500px;
+    background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    position: fixed;
+    top: 205px;
+    left: 485px;
+}
+
+
+#courses-dl{
+    position: fixed;
+    width: 240px;
+    height: 50px;
+    background: #6B717D;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px black solid;
+    top: 46px;
+    left: 240px;
+    font-weight: 600;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+
+}
+
+
+#enroll-dl{
+    position: fixed;
+    width: 280px;
+    height: 50px;
+    background: #6B717D;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px black solid;
+    top: 46px;
+    left: 420px;
+    z-index: -1;
+    font-weight: 600;
+    color: white;
+    font-size: 25px;
+    padding-left: 55px;
+    cursor: pointer;
+}
+
+#courses-dl:hover, #enroll-dl:hover {
+    background-color: #9F79C7;
+}

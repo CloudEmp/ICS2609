@@ -1,0 +1,245 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 03 1, 24, 12:57:37 PM
+    Author     : Andrea
+*/
+
+*{
+    font-family: "Century Gothic";
+}
+
+body {
+    background-image: url('images/bg.png');
+    background-size: 1600px 800px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: fixed;
+}
+
+.site-login {
+    width: 200px;
+    color: #1E293B;
+    font-size: 60px;
+    font-weight: 700;
+    position: fixed;
+    top: 20px;
+
+}
+
+.container1-login {
+    width: 462px;
+    height: 560px;
+    left: 808px;
+    top: 110px;
+    position: fixed;
+    background: #F6FAFC;
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 35px;
+
+
+}
+
+.container2-login {
+    width: 462px;
+    height: 460px;
+    left: 808px;
+    top: 110px;
+    position: fixed;
+    background: white;
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 35px
+}
+
+.container3-login {
+    width: 462px;
+    height: 580px;
+    left: 808px;
+    top: 70px;
+    position: fixed;
+    background: transparent;
+    margin: 100px 0px 0px 0px;
+}
+
+.container4-login {
+    width: 550px;
+    height: 112px;
+    left: 270px;
+    top: 120px;
+    position: fixed;
+    text-align: left;
+    font-size: 21px;
+}
+
+#image-code {
+    width: 790px;
+    height: 400px;
+    left: 250px;
+    top: 220px;
+    position: fixed;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+
+.container3-login h1 {
+    color: #1E293B;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.container3-login label {
+    color: #BCBFC4;
+    font-size: 15px;
+    position: absolute;
+    top: 250px;
+    right:165px;
+    font-weight: 600;
+
+}
+
+.container3-login input[type="text"], input[type="password"]{
+    width: 320px;
+    height: 50px;
+
+    font-size: 20px;
+    font-weight: 600;
+
+
+    background-color: #F5F5F5;
+    border-radius: 45px;
+    border: 0px solid #ccc;
+    text-align: center;
+}
+
+#username::placeholder,
+#password::placeholder {
+    color: #B5B8BD;
+}
+
+
+.container3-login input[type="submit"] {
+    font-weight: 600;
+    color: white;
+    font-size: 28px;
+    width: 240px;
+    height: 70px;
+    background: #1E293B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    position: absolute;
+    top: 365px;
+    right: 110px;
+
+}
+
+input[type="submit"]:hover {
+    background-color: #9F79C7;
+}
+
+#contact-login {
+    font-weight: 600;
+    color: white;
+    font-size: 19px;
+    width: 160px;
+    height: 45px;
+    background: #1E293B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    text-align: center;
+    position: fixed;
+    top: 30px;
+    left: 1110px;
+
+}
+
+#contact-login:hover {
+    background-color: #9F79C7;
+}
+
+
+
+.container3-captcha input[type="text"]{
+    width: 320px;
+    height: 90px;
+    font-size: 30px;
+    font-weight: 600;
+    background-color: #F5F5F5;
+    border-radius: 45px;
+    border: 0px solid #ccc;
+    text-align: center;
+}
+
+.container3-captcha {
+
+    width: 462px;
+    height: 580px;
+    left: 808px;
+    top: 70px;
+    position: fixed;
+    background: transparent;
+    margin: 100px 0px 0px 0px;
+}
+
+.container3-captcha h1 {
+    color: #9F79C7;
+    font-size: 50px;
+    margin-bottom: 60px;
+}
+
+.container3-captcha label {
+    color: #BCBFC4;
+    font-size: 15px;
+    position: fixed;
+    top: 300px;
+    left:900px;
+    font-weight: 600;
+
+}
+
+.container3-captcha input[type="submit"] {
+    font-weight: 600;
+    color: white;
+    font-size: 28px;
+    width: 240px;
+    height: 70px;
+    background: #1E293B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    position: absolute;
+    top: 365px;
+    right: 110px;
+
+}
+
+input[type="submit"]:hover {
+    background-color: #9F79C7;
+}
+
+
+#header {
+    font-style: italic;
+    color: rgba(30, 41, 59, 0.50);
+    margin-top: 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#footer {
+    font-style: italic;
+    color: rgba(30, 41, 59, 0.50);
+    margin-top: auto;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
