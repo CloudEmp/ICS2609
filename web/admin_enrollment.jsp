@@ -158,6 +158,18 @@
                 cell3.innerHTML = endDate;
                 cell4.innerHTML = '<img src="images/delete.png" alt="Delete" onclick="deleteCourse(this)" style="width: 30px; height: 26px;">';
             }
+            
+            function validateDates() {
+            var startDate = new Date(document.getElementById("startDate").value);
+            var endDate = new Date(document.getElementById("endDate").value);
+
+            if (startDate > endDate) {
+                alert("Start date cannot be later than end date");
+                return false; // Prevent form submission
+            }
+
+              return true; // Proceed with form submission
+            }
 
             function deleteCourse(row) {
                 var i = row.parentNode.parentNode.rowIndex;
