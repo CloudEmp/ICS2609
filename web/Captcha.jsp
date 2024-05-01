@@ -7,6 +7,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+    <% response.setHeader("Pragma", "no-cache"); %>
+    <% response.setDateHeader("Expires", 0); %>
+    <%
+        if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") != null) {
+            response.sendRedirect("admin_courses.jsp");
+        } else if (session.getAttribute("usernamesession") == null)
+            response.sendRedirect("index.jsp");
+    %>
     <head>
         <meta charset="UTF-8">
         <title>Captcha</title>
@@ -17,7 +26,7 @@
 
     <body>
         <div id="header">
-            <p style="font-family: Courier New;"><%= getServletContext().getInitParameter("header")%></p>
+            <p style="font-family: Courier New;"><% out.print(getServletContext().getInitParameter("name")); %> <% out.print(getServletContext().getInitParameter("section"));%></p>
         </div>
 
 
@@ -45,12 +54,12 @@
         <div class="container3-captcha">
 
             <!-- display captcha -->
-            <h1><%= request.getSession().getAttribute("captcha")%></h1>
+            <h1><% out.print(request.getAttribute("captchatext"));%></h1>
 
             <!-- enter captcha -->
-            <form action="CaptchaServlet" method="post">
+             <form action="CaptchaServlet" method="post">
                 <label for="captcha">Enter the CAPTCHA displayed above:</label><br>
-                <input type="text" id="captcha" name="captcha" required><br><br>
+                <input type="text" id="captcha" name="captcha"><br><br>
                 <input type="submit" value="Submit">
             </form>
 
@@ -65,9 +74,9 @@
         </div>
 
         <div id="footer"
-             <p style="font-family: Courier New;"><%= getServletContext().getInitParameter("footer")%></p>
-    </div>
-</body>
+             <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
+        </div>
+    </body>
 </html>
 
 
