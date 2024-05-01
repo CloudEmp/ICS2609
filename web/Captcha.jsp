@@ -50,7 +50,7 @@
             <!-- enter captcha -->
             <form action="CaptchaServlet" method="post">
                 <label for="captcha">Enter the CAPTCHA displayed above:</label><br>
-                <input type="text" id="captcha" name="captcha"><br><br>
+                <input type="text" id="captcha" name="captcha" required><br><br>
                 <input type="submit" value="Submit">
             </form>
 
