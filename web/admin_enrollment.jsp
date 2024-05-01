@@ -146,6 +146,21 @@
                 var startDate = document.getElementById("startDate").value;
                 var endDate = document.getElementById("endDate").value;
 
+                // Convert the date strings to Date objects for comparison
+                var startDateObj = new Date(startDate);
+                var endDateObj = new Date(endDate);
+
+                if (!startDate || !endDate) {
+                    alert("Please enter both start and end dates.");
+                    return; // Exit the function without adding the course
+                }
+
+                // Check if the start date is later than the end date
+                if (startDateObj > endDateObj) {
+                    alert("Start date cannot be later than end date.");
+                    return; // Exit the function without adding the course
+                }
+
                 var table = document.getElementById("courseTable");
                 var newRow = table.insertRow(-1);
                 var cell1 = newRow.insertCell(0);
@@ -157,18 +172,14 @@
                 cell2.innerHTML = startDate;
                 cell3.innerHTML = endDate;
                 cell4.innerHTML = '<img src="images/delete.png" alt="Delete" onclick="deleteCourse(this)" style="width: 30px; height: 26px;">';
-            }
-            
-            function validateDates() {
-            var startDate = new Date(document.getElementById("startDate").value);
-            var endDate = new Date(document.getElementById("endDate").value);
 
-            if (startDate > endDate) {
-                alert("Start date cannot be later than end date");
-                return false; // Prevent form submission
-            }
+                // Close the modal after adding the course
+                toggleModal();
 
-              return true; // Proceed with form submission
+                // Clear the input fields
+                document.getElementById("courseName").value = "";
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
             }
 
             function deleteCourse(row) {
