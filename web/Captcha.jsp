@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 03 1, 24, 8:01:15 AM
+    Document   : Captcha.jsp
+    Created on : 04 29, 24, 7:41:54 PM
     Author     : Andrea
 --%>
 
@@ -9,11 +9,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Login</title>
+        <title>Captcha</title>
         <link href="https://db.onlinewebfonts.com/c/7515664cb5fad83d8ce956ad409ccbb7?family=Helvetica+Rounded+LT+Std+Bold" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel="stylesheet" href="styles.css">
-
     </head>
 
     <body>
@@ -23,8 +22,8 @@
 
 
         <img id="image-code" src="images/code.png" class="box" alt="Intro Image"/>
-
         <div class="site-login">al.</div>
+
 
         <form action="https://activelearning.ph/contact/" method="get" target="_blank">
             <input id="contact-login" type="submit" value="Contact Us">
@@ -43,14 +42,26 @@
 
         <div class="container1-login"></div>
         <div class="container2-login"></div>
-        <div class="container3-login">
-            <h1>Welcome!</h1>
-            <form action="LoginServlet" method="post">
-                <input type="text" id="username" name="username" placeholder="username" ><br><br>
-                <input type="password" id="password" name="password" placeholder="password"><br><br>
-                <label>Forgot Password?</label><br>
-                <input type="submit" value="Login">
+        <div class="container3-captcha">
+
+            <!-- display captcha -->
+            <h1><%= request.getSession().getAttribute("captcha")%></h1>
+
+            <!-- enter captcha -->
+            <form action="CaptchaServlet" method="post">
+                <label for="captcha">Enter the CAPTCHA displayed above:</label><br>
+                <input type="text" id="captcha" name="captcha"><br><br>
+                <input type="submit" value="Submit">
             </form>
+
+            <script>
+
+                // bawal mag paste
+                document.getElementById("captcha").addEventListener("paste", function (e) {
+                    e.preventDefault();
+                    alert("Copying and pasting is not allowed for CAPTCHA!");
+                });
+            </script>
         </div>
 
         <div id="footer"
@@ -58,3 +69,6 @@
     </div>
 </body>
 </html>
+
+
+
