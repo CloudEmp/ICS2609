@@ -12,7 +12,7 @@
         <title>Captcha</title>
         <link href="https://db.onlinewebfonts.com/c/7515664cb5fad83d8ce956ad409ccbb7?family=Helvetica+Rounded+LT+Std+Bold" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
 
     <body>
