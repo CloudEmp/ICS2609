@@ -5,16 +5,19 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Lennard Flores
+ * @author Tristan
  */
-public class dummyServlet extends HttpServlet {
+public class CaptchaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -25,6 +28,14 @@ public class dummyServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    int captchalength;
+    String captchatext;
+
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        captchalength = Integer.parseInt(config.getInitParameter("captcha_length"));
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -33,10 +44,10 @@ public class dummyServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet dummyServlet</title>");            
+            out.println("<title>Servlet CaptchaServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet dummyServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CaptchaServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,7 +65,12 @@ public class dummyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        captchatext = generateCaptcha(captchalength);
+        request.setAttribute("captchatext", captchatext);
+        request.setAttribute("captchalength", captchalength);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Captcha.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -68,7 +84,21 @@ public class dummyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        HttpSession session = request.getSession();
+        String captcha = request.getParameter("captcha");
+        String userrole = (String) session.getAttribute("userrolesession");
+
+        if (captchatext.equals(captcha) && userrole.equals("Instructor")) {
+            session.setAttribute("captchasession", captcha);
+            response.sendRedirect("admin_courses.jsp");
+        } else if (captchatext.equals(captcha) && userrole.equals("Student")) {
+            session.setAttribute("captchasession", captcha);
+            response.sendRedirect("guest_courses.jsp");
+        } else {
+            response.sendRedirect("CaptchaServlet");
+        }
+
     }
 
     /**
@@ -80,5 +110,15 @@ public class dummyServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    public static String generateCaptcha(int n) {
+        String chrs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String captcha = "";
+        while (n-- > 0) {
+            int index = (int) (Math.random() * 62);
+            captcha += chrs.charAt(index);
+        }
+        return captcha;
+    }
 
 }

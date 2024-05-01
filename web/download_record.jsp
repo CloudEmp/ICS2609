@@ -7,6 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+    <% response.setHeader("Pragma", "no-cache"); %>
+    <% response.setDateHeader("Expires", 0); %>
+    <%
+        if (session.getAttribute("usernamesession") == null) {
+            response.sendRedirect("index.jsp");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") == null) {
+            response.sendRedirect("CaptchaServlet");
+        }
+    %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Active Learning</title>
@@ -20,8 +30,8 @@
         <h1 class="al">al.</h1>
 
         <div class="container-course">
-            <p1 class="hello">Hello, <%= session.getAttribute("username")%>!</p1>
-            <p1 class="role"><%= session.getAttribute("role")%></p1>
+            <p1 class="hello">Hello, <%= session.getAttribute("fullnamesession")%>!</p1>
+            <p1 class="role"><%= session.getAttribute("userrolesession")%></p1>
         </div>
 
         <div class="container1-course">
@@ -67,8 +77,8 @@
                     </a>
                 </div>
 
-                <form action="index.jsp" method="get">
-                    <input id="logout" type="submit" value="Logout">
+                <form action="LoginServlet" method="post">
+                    <input id="logout" type="submit" value="logout" name="logout">
                 </form>
 
             </div>
@@ -76,12 +86,12 @@
 
 
         <div class="container2-course">
-            <form action="admin_courses.jsp" method="get">
-                <input id="courses-dl" type="submit" value="My Courses">
+           <form action="CourseServlet" method="get">
+                <input id="courses" type="submit" name="place" value="MyCourses">
             </form>
 
-            <form action="admin_enrollment.jsp" method="get">
-                <input id="enroll-dl" type="submit" value="Enrollment">
+            <form action="CourseServlet" method="get">
+                <input id="enroll" type="submit" name="place" value="Enrollment">
             </form>
 
             <form action="download_record.jsp" method="get">
@@ -96,16 +106,16 @@
         </div>
 
 
-        <form action="ReportServlet" method="post">
-            <input  id="own-record" type="submit" value="download own record">
+        <form action="ReportsPDF" method="post">
+            <input  id="own-record" type="submit" value="My Record" name="reports">
         </form>
 
-        <form action="ReportServlet" method="post">
-            <input  id="all-record" type="submit" value="download all record">
+        <form action="ReportsPDF" method="post">
+            <input  id="all-record" type="submit" value="All Records" name="reports">
         </form>
 
-        <form action="ReportServlet" method="post">
-            <input  id="course-record" type="submit" value="download courses">
+        <form action="ReportsPDF" method="post">
+            <input  id="course-record" type="submit" value="Courses" name="reports">
         </form>
 
         <div class="print-container">

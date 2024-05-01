@@ -4,9 +4,22 @@
     Author     : Andrea
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+    <% response.setHeader("Pragma", "no-cache"); %>
+    <% response.setDateHeader("Expires", 0); %>
+    <%
+        if (session.getAttribute("usernamesession") == null) {
+            response.sendRedirect("index.jsp");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") == null) {
+            response.sendRedirect("CaptchaServlet");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("usernamesession") == "Student") {
+            response.sendRedirect("guest_courses.jsp");
+        }
+    %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Active Learning</title>
@@ -20,8 +33,8 @@
         <h1 class="al">al.</h1>
 
         <div class="container-course">
-            <p1 class="hello">Hello, <%= session.getAttribute("username")%>!</p1>
-            <p1 class="role"><%= session.getAttribute("role")%></p1>
+            <p1 class="hello">Hello, <%= session.getAttribute("fullnamesession")%>!</p1>
+            <p1 class="role"><%= session.getAttribute("userrolesession")%></p1>
         </div>
 
         <div class="container1-course">
@@ -67,21 +80,21 @@
                     </a>
                 </div>
 
-                <form action="index.jsp" method="get">
-                    <input id="logout" type="submit" value="Logout">
+                <form action="LoginServlet" method="post">
+                    <input id="logout" type="submit" value="logout" name="logout">
                 </form>
 
             </div>
         </div>
 
 
-        <div class="container2-course">
-            <form action="admin_courses.jsp" method="get">
-                <input id="courses" type="submit" value="My Courses">
+         <div class="container2-course">
+            <form action="CourseServlet" method="get">
+                <input id="courses" type="submit" name="place" value="MyCourses">
             </form>
 
-            <form action="admin_enrollment.jsp" method="get">
-                <input id="enroll" type="submit" value="Enrollment">
+            <form action="CourseServlet" method="get">
+                <input id="enroll" type="submit" name="place" value="Enrollment">
             </form>
 
             <form action="download_record.jsp" method="get">
@@ -89,22 +102,34 @@
             </form>
 
         </div>
-
+        
         <div  class="container4-course">
             <img id="image-bg" src="images/bg-admin.png" class="box" alt="bg image"/>
 
         </div>
 
 
+        <%
+            try {
+                ArrayList<ArrayList<String>> courses = (ArrayList<ArrayList<String>>) request.getAttribute("courses");
+                if (!courses.isEmpty()) {
+                    for (ArrayList<String> course : courses) {
+        %>
         <div class="gc-container-1">
             <a href="https://activelearning.ph/course/basic-python-training-philippines/" target="_blank">
                 <img src="images/basicpython.png" class="img-python"></a>
-            <p class="gc-python">Basic Python Programming</p>
+            <p class="gc-python"><%= course.get(0)%></p>
             <img src="images/clock.png" class="img-clock">
             <p class="duration">20 hours</p>      
             <img src="images/enrollees.png" onclick="openModal()" class="img-enrollees">
-
         </div>
+        <%
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        %>
 
 
         <div id="myModal" class="modal">

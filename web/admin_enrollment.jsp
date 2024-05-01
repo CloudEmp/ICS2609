@@ -4,9 +4,22 @@
     Author     : Andrea
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+    <% response.setHeader("Pragma", "no-cache"); %>
+    <% response.setDateHeader("Expires", 0); %>
+    <%
+        if (session.getAttribute("usernamesession") == null) {
+            response.sendRedirect("index.jsp");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") == null) {
+            response.sendRedirect("CaptchaServlet");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("usernamesession") == "Student") {
+            response.sendRedirect("guest_courses.jsp");
+        }
+    %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Active Learning</title>
@@ -34,8 +47,8 @@
         <h1 class="al">al.</h1>
 
         <div class="container-course">
-            <p1 class="hello">Hello, <%= session.getAttribute("username")%>!</p1>
-            <p1 class="role"><%= session.getAttribute("role")%></p1>
+            <p1 class="hello">Hello, <%= session.getAttribute("fullnamesession")%>!</p1>
+            <p1 class="role"><%= session.getAttribute("userrolesession")%></p1>
         </div>
 
         <div class="container1-course">
@@ -81,8 +94,8 @@
                     </a>
                 </div>
 
-                <form action="index.jsp" method="get">
-                    <input id="logout" type="submit" value="Logout">
+                <form action="LoginServlet" method="post">
+                    <input id="logout" type="submit" value="logout" name="logout">
                 </form>
 
             </div>
@@ -90,12 +103,12 @@
 
 
         <div class="container2-course">
-            <form action="admin_courses.jsp" method="get">
-                <input id="courses" type="submit" value="My Courses">
+            <form action="CourseServlet" method="get">
+                <input id="courses" type="submit" name="place" value="MyCourses">
             </form>
 
-            <form action="admin_enrollment.jsp" method="get">
-                <input id="enroll" type="submit" value="Enrollment">
+            <form action="CourseServlet" method="get">
+                <input id="enroll" type="submit" name="place" value="Enrollment">
             </form>
 
             <form action="download_record.jsp" method="get">
@@ -126,7 +139,27 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <%
+                                try {
+                                    ArrayList<ArrayList<String>> courses = (ArrayList<ArrayList<String>>) request.getAttribute("courses");
+                                    for (ArrayList<String> course : courses) {
+                            %>
+                            <tr>
+                                <td><%= course.get(0)%></td>
+                                <td><%= course.get(1)%></td>
+                                <td><%= course.get(2)%></td>
+                                <td><form action="CourseServlet" method="post">
+                                        <input type="hidden" name="course" value="<%= course.get(0)%>">
+                                        <button type="submit" name="option" value="Delete" style="border: none; background: none; padding: 0;">
+                                            <img src="images/delete.png" alt="Delete" style="width: 30px; height: 26px;">
+                                        </button>                                        </form></td>
+                            </tr>
+                            <%
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            %>
                         </tbody>
                     </table>
                 </section>
@@ -139,70 +172,32 @@
                 var modal = document.getElementById('modal');
                 modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
             }
-
-
-            function addCourse() {
-                var courseName = document.getElementById("courseName").value;
-                var startDate = document.getElementById("startDate").value;
-                var endDate = document.getElementById("endDate").value;
-
-                // Convert the date strings to Date objects for comparison
-                var startDateObj = new Date(startDate);
-                var endDateObj = new Date(endDate);
-
-                if (!startDate || !endDate) {
-                    alert("Please enter both start and end dates.");
-                    return; // Exit the function without adding the course
-                }
-
-                // Check if the start date is later than the end date
-                if (startDateObj > endDateObj) {
-                    alert("Start date cannot be later than end date.");
-                    return; // Exit the function without adding the course
-                }
-
-                var table = document.getElementById("courseTable");
-                var newRow = table.insertRow(-1);
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                var cell3 = newRow.insertCell(2);
-                var cell4 = newRow.insertCell(3);
-
-                cell1.innerHTML = courseName;
-                cell2.innerHTML = startDate;
-                cell3.innerHTML = endDate;
-                cell4.innerHTML = '<img src="images/delete.png" alt="Delete" onclick="deleteCourse(this)" style="width: 30px; height: 26px;">';
-
-                // Close the modal after adding the course
-                toggleModal();
-
-                // Clear the input fields
-                document.getElementById("courseName").value = "";
-                document.getElementById("startDate").value = "";
-                document.getElementById("endDate").value = "";
-            }
-
-            function deleteCourse(row) {
-                var i = row.parentNode.parentNode.rowIndex;
-                document.getElementById("courseTable").deleteRow(i);
-            }
         </script>
 
 
         <!-- input record -->
         <div id="modal" class="modal">
             <div class="modal-content">
-                <form>
+                <form action="CourseServlet" method="POST">
                     <label for="courseName">Course Name:</label>
-                    <input type="text" id="courseName">
+                    <select id="course" name="course" required>
+                        <option value="Laravel Framework">Laravel Framework</option>
+                        <option value="Advanced Python Programming">Advanced Python Programming</option>
+                        <option value="Microsoft Excel Advanced">Microsoft Excel Advanced</option>
+                        <option value="User Experience(UX)">User Experience(UX)</option>
+                        <option value="CompTIA Security+">CompTIA Security+</option>
+                        <option value="Microsoft Excel Essentials">Microsoft Excel Essentials</option>
+                        <option value="ITIL 4 Foundation Certification Program">ITIL 4 Foundation Certification Program</option>
+                        <option value="Agile Project Management with Scrum">Agile Project Management with Scrum</option>
+                    </select>
                     <br><br>
                     <label for="startDate">Start Date:</label>
-                    <input type="date" id="startDate">
+                    <input type="date" id="startDate" name="startdate" required>
                     <br><br>
                     <label for="endDate">End Date:</label>
-                    <input type="date" id="endDate">
+                    <input type="date" id="endDate" name="enddate" required>
                     <br><br>
-                    <button type="button" onclick="addCourse()">Add</button>
+                    <input type="submit" onclick="addCourse()" name="option" value="Add">
                 </form>
 
                 <span class="close" onclick="toggleModal()">&times;</span>

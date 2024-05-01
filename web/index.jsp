@@ -7,6 +7,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+    <% response.setHeader("Pragma", "no-cache"); %>
+    <% response.setDateHeader("Expires", 0); %>
+    <%
+        if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") != null) {
+            response.sendRedirect("admin_courses.jsp");
+        } else if (session.getAttribute("usernamesession") != null) {
+            response.sendRedirect("CaptchaServlet");
+        }
+    %>
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
@@ -18,7 +28,7 @@
 
     <body>
         <div id="header">
-            <p style="font-family: Courier New;"><%= getServletContext().getInitParameter("header")%></p>
+            <p style="font-family: Courier New;"><% out.print(getServletContext().getInitParameter("name")); %> <% out.print(getServletContext().getInitParameter("section"));%></p>
         </div>
 
 
@@ -54,7 +64,7 @@
         </div>
 
         <div id="footer"
-             <p style="font-family: Courier New;"><%= getServletContext().getInitParameter("footer")%></p>
-    </div>
-</body>
+             <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
+        </div>
+    </body>
 </html>
