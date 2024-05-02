@@ -77,12 +77,8 @@ public class ReportsPDF extends HttpServlet {
             conn
                     = DriverManager.getConnection(url.toString(), username, password);
 
-        } catch (SQLException sqle) {
-            System.out.println("SQLException error occured - "
-                    + sqle.getMessage());
-        } catch (ClassNotFoundException nfe) {
-            System.out.println("ClassNotFoundException error occured - "
-                    + nfe.getMessage());
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
 
         try {
@@ -212,7 +208,7 @@ public class ReportsPDF extends HttpServlet {
                 writer.setPageEvent(event);
                 document.open();
 
-                PdfPTable table = new PdfPTable(4);
+                PdfPTable table = new PdfPTable(5);
                 table.setWidthPercentage(100);
                 table.setSpacingBefore(10);
 
@@ -220,6 +216,7 @@ public class ReportsPDF extends HttpServlet {
                 table.addCell("Instructor");
                 table.addCell("Start Date");
                 table.addCell("End Date");
+                table.addCell("Duration (Hours)");
 
                 Statement stmt = connection.createStatement();
                 String query = "SELECT * FROM COURSES_INFO";
@@ -230,11 +227,13 @@ public class ReportsPDF extends HttpServlet {
                     String instructorname = rs.getString("INSTRUCTOR");
                     String coursestart = rs.getString("STARTDATE");
                     String courseend = rs.getString("ENDDATE");
+                    String duration = rs.getString("DURATIONHOURS");
 
                     table.addCell(coursename);
                     table.addCell(instructorname);
                     table.addCell(coursestart);
                     table.addCell(courseend);
+                    table.addCell(duration);
                 }
 
                 document.add(table);

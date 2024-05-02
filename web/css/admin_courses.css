@@ -264,6 +264,7 @@ a:hover {
     transition: transform 0.3s ease-in-out;
 }
 
+
 /*
 .gc-container-1:hover {
     transform: scale(1.10);
@@ -340,6 +341,30 @@ a:hover {
     width: 32px;
     height: 29px;
     margin: 215px 0 0 98px;
+}
+
+.gc-container-2 {
+    position: fixed;
+    width: 250px;
+    height: 240px;
+    margin: 126px 0 0 625px;
+    padding: 23px 21px 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.gc-container-3 {
+    position: fixed;
+    width: 250px;
+    height: 240px;
+    margin: 126px 0 0 942px;
+    padding: 23px 21px 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
 }
 
 

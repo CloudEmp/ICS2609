@@ -29,22 +29,6 @@
         <param-name>encryption_key</param-name>
         <param-value>melchtristlennar</param-value>
     </context-param>
-    <context-param>
-        <param-name>url</param-name>
-        <param-value>jdbc:mysql://localhost:3306/coursesdb?useSSL=false</param-value>
-    </context-param>
-    <context-param>
-        <param-name>username</param-name>
-        <param-value>root</param-value>
-    </context-param>
-    <context-param>
-        <param-name>password</param-name>
-        <param-value>root</param-value>
-    </context-param>
-    <context-param>
-        <param-name>driver</param-name>
-        <param-value>com.mysql.cj.jdbc.Driver</param-value>
-    </context-param>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>LoginServlet</servlet-class>
