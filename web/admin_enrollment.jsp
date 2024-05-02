@@ -16,9 +16,12 @@
             response.sendRedirect("index.jsp");
         } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") == null) {
             response.sendRedirect("CaptchaServlet");
-        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("usernamesession") == "Student") {
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("userrolesession") == "Student") {
             response.sendRedirect("guest_courses.jsp");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("coursessession") == null) {
+            response.sendRedirect("CourseServlet");
         }
+        session.setAttribute("coursessession", null);
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -210,7 +213,23 @@
 
         </div>
 
+        <% if (request.getAttribute("limitreached") != null) {%>
+        <script>
+            alert('<%= request.getAttribute("limitreached")%>');
+        </script>
+        <% } %>
 
+        <% if (request.getAttribute("invaliddate") != null) {%>
+        <script>
+            alert('<%= request.getAttribute("invaliddate")%>');
+        </script>
+        <% }%>
+        
+        <% if (request.getAttribute("handledalready") != null) {%>
+        <script>
+            alert('<%= request.getAttribute("handledalready")%>');
+        </script>
+        <% }%>
 
     </body>
 </html>

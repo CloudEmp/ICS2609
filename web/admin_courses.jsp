@@ -16,9 +16,12 @@
             response.sendRedirect("index.jsp");
         } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") == null) {
             response.sendRedirect("CaptchaServlet");
-        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("usernamesession") == "Student") {
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("userrolesession") == "Student") {
             response.sendRedirect("guest_courses.jsp");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("coursessession") == null) {
+            response.sendRedirect("CourseServlet");
         }
+        session.setAttribute("coursessession", null);
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -88,7 +91,7 @@
         </div>
 
 
-         <div class="container2-course">
+        <div class="container2-course">
             <form action="CourseServlet" method="get">
                 <input id="courses" type="submit" name="place" value="MyCourses">
             </form>
@@ -102,7 +105,7 @@
             </form>
 
         </div>
-        
+
         <div  class="container4-course">
             <img id="image-bg" src="images/bg-admin.png" class="box" alt="bg image"/>
 
@@ -113,23 +116,26 @@
             try {
                 ArrayList<ArrayList<String>> courses = (ArrayList<ArrayList<String>>) request.getAttribute("courses");
                 if (!courses.isEmpty()) {
+                    int counter = 1;
                     for (ArrayList<String> course : courses) {
         %>
-        <div class="gc-container-1">
+        <div class="gc-container-<%=counter%>">
             <a href="https://activelearning.ph/course/basic-python-training-philippines/" target="_blank">
                 <img src="images/basicpython.png" class="img-python"></a>
             <p class="gc-python"><%= course.get(0)%></p>
             <img src="images/clock.png" class="img-clock">
-            <p class="duration">20 hours</p>      
+            <p class="duration"><%= course.get(3)%> hours</p>
             <img src="images/enrollees.png" onclick="openModal()" class="img-enrollees">
         </div>
         <%
+                        counter++;
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         %>
+
 
 
         <div id="myModal" class="modal">
@@ -185,10 +191,10 @@
         </div>
 
         <script>
-         
+
             function openModal() {
                 document.getElementById('myModal').style.display = "block";
-                
+
             }
 
             function closeModal() {

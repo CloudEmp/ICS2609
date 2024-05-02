@@ -15,6 +15,8 @@
             response.sendRedirect("index.jsp");
         } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") == null) {
             response.sendRedirect("CaptchaServlet");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("userrolesession") == "Student") {
+            response.sendRedirect("guest_courses.jsp");
         }
     %>
     <head>
@@ -86,7 +88,7 @@
 
 
         <div class="container2-course">
-           <form action="CourseServlet" method="get">
+            <form action="CourseServlet" method="get">
                 <input id="courses" type="submit" name="place" value="MyCourses">
             </form>
 
@@ -119,7 +121,7 @@
         </form>
 
         <div class="print-container">
-
+            
         </div>
 
     </body>

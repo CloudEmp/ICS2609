@@ -15,7 +15,7 @@
             response.sendRedirect("index.jsp");
         } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") == null) {
             response.sendRedirect("CaptchaServlet");
-        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("usernamesession") == "Instructor") {
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("userrolesession") == "Instructor") {
             response.sendRedirect("admin_courses.jsp");
         }
     %>
