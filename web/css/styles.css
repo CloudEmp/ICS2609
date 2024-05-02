@@ -189,6 +189,9 @@ input[type="submit"]:hover {
     color: #9F79C7;
     font-size: 50px;
     margin-bottom: 60px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    user-select:none;
 }
 
 .container3-captcha label {

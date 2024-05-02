@@ -28,7 +28,7 @@
 
         <div class="Error-message">
             <h1>Oopss!<h1>
-            <h2 >Wrong Username&Password</h2>
+            <h3>Wrong Username&Password</h3>
                 <p>The username and password combination is incorrect.</p>
                 <p>Please ensure you have entered the correct username and password.</p>
         </div>

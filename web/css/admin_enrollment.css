@@ -315,7 +315,7 @@ a:hover {
     color: #1E293B;
 }
 
-.modal-content input[type="text"],
+.modal-content select,
 .modal-content input[type="date"] {
     width: 75%;
     height: 40px;
@@ -328,7 +328,7 @@ a:hover {
     text-align: center;
 }
 
-.modal-content button {
+.modal-content input[type="submit"] {
     background-color: #1E293B;
     color: #fff;
     padding: 10px 20px;
