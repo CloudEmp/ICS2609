@@ -12,7 +12,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 body {
-    background-image: url('images/bg.png');
     background-size: 1600px 800px;
     text-align: center;
     display: flex;

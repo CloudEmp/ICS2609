@@ -108,20 +108,34 @@
         </div>
 
 
-        <form action="ReportsPDF" method="post">
-            <input  id="own-record" type="submit" value="My Record" name="reports">
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input id="my-record" class="record-button" type="submit" value="My Record" name="reports">
         </form>
 
-        <form action="ReportsPDF" method="post">
-            <input  id="all-record" type="submit" value="All Records" name="reports">
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input id="all-records" class="record-button" type="submit" value="All Records" name="reports">
         </form>
 
-        <form action="ReportsPDF" method="post">
-            <input  id="course-record" type="submit" value="Courses" name="reports">
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input id="courses" class="record-button" type="submit" value="Courses" name="reports">
         </form>
 
-        <div class="print-container">
-            
+        <br>
+
+        <iframe name="pdfFrame" width="100%" height="600"></iframe>
+
+        <script>
+            function resizeIframe() {
+                var iframe = document.getElementById('pdfFrame');
+                if (iframe.contentWindow.document.body) {
+                    iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+                }
+            }
+
+            window.addEventListener('resize', resizeIframe);
+            document.addEventListener('DOMContentLoaded', resizeIframe);
+        </script>
+
         </div>
 
     </body>
