@@ -484,8 +484,6 @@ tbody tr:hover {
 
 }
 
-
-
 .container-course {
     position: fixed;
     left: 0;
@@ -505,7 +503,22 @@ tbody tr:hover {
     color: #1E293B;
     font-size: 19px;
     text-align: center;
-    width: 240px;
+    width: 170px;
+    height: 57px;
+    background: transparent;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 2px #1E293B solid;
+    cursor: pointer;
+    position: fixed;
+}
+
+.record-button2 { 
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 19px;
+    text-align: center;
+    width: 70px;
     height: 57px;
     background: transparent;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -525,14 +538,30 @@ tbody tr:hover {
     left: 300px;
 }
 
+#my-record2 {
+    top: 125px;
+    left: 490px;
+}
+
+
 #all-records {
     top: 200px;
     left: 300px;
 }
 
+#all-records2 {
+    top: 200px;
+    left: 490px;
+}
+
 #courses {
     top: 276px;
     left: 300px;
+}
+
+#courses2 {
+    top: 276px;
+    left: 490px;
 }
 
 

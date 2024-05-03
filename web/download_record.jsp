@@ -109,15 +109,33 @@
 
 
         <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="false">
             <input id="my-record" class="record-button" type="submit" value="My Record" name="reports">
         </form>
 
         <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="true">
+            <input id="my-record2" class="record-button2" type="submit" value="↓" name="reports">
+        </form>
+
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="false">
             <input id="all-records" class="record-button" type="submit" value="All Records" name="reports">
         </form>
 
         <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="true">
+            <input id="all-records2" class="record-button2" type="submit" value="↓" name="reports">
+        </form>
+
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="false">
             <input id="courses" class="record-button" type="submit" value="Courses" name="reports">
+        </form>
+
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="true">
+            <input id="courses2" class="record-button2" type="submit" value="↓" name="reports">
         </form>
 
         <br>
@@ -136,7 +154,7 @@
             document.addEventListener('DOMContentLoaded', resizeIframe);
         </script>
 
-        </div>
+    </div>
 
-    </body>
+</body>
 </html>

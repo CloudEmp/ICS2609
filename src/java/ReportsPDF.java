@@ -131,6 +131,11 @@ public class ReportsPDF extends HttpServlet {
 
     }
 
+    private String getTimestamp() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return dateFormat.format(new Date());
+    }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -147,8 +152,21 @@ public class ReportsPDF extends HttpServlet {
         username1 = (String) session.getAttribute("usernamesession");
         String password = decrypt((String) session.getAttribute("passwordsession"));
         String report = request.getParameter("reports");
+        String report2 = request.getParameter("reports2");
+
+        boolean isDownload = Boolean.parseBoolean(request.getParameter("download"));
 
         response.setContentType("application/pdf");
+        //response.setContentType("application/pdf");
+        if (isDownload) {
+            // Set the filename for download
+            response.setContentType("application/pdf");
+            String filename = "COURSELIST_" + getTimestamp() + ".pdf";
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+        }
+
+        // Set the filename for the download
+       
         ServletOutputStream out = response.getOutputStream();
 
         try {
@@ -174,11 +192,16 @@ public class ReportsPDF extends HttpServlet {
                     String username2 = rs.getString("USERNAME").trim();
                     String userrole1 = rs.getString("USERROLE").trim();
 
+                    if (username2.equals(session.getAttribute("usernamesession"))) {
+                        username2 += "*"; // Add asterisk to the username
+                    }
+
                     table.addCell(username2);
                     table.addCell(userrole1);
                 }
 
                 document.add(table);
+
                 document.close();
             } else if (report.equals("My Record")) {
                 Document document = new Document(new com.itextpdf.text.Rectangle(200, 400).rotate());
@@ -228,6 +251,10 @@ public class ReportsPDF extends HttpServlet {
                     String coursestart = rs.getString("STARTDATE");
                     String courseend = rs.getString("ENDDATE");
                     String duration = rs.getString("DURATIONHOURS");
+
+                    if (instructorname.equals(session.getAttribute("usernamesession"))) {
+                        instructorname += "*"; // Add asterisk to the username
+                    }
 
                     table.addCell(coursename);
                     table.addCell(instructorname);
@@ -286,7 +313,7 @@ public class ReportsPDF extends HttpServlet {
             String name = servletContext.getInitParameter("name");
             String section = servletContext.getInitParameter("section");
 
-            float dynamicContentY = topY + 18; 
+            float dynamicContentY = topY + 18;
             String dynamicText = name + " " + section;
             ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(dynamicText, headerFont1), centerX, dynamicContentY, 0);
 
@@ -359,7 +386,7 @@ public class ReportsPDF extends HttpServlet {
             String name = servletContext.getInitParameter("name");
             String section = servletContext.getInitParameter("section");
 
-            float dynamicContentY = topY + 18; 
+            float dynamicContentY = topY + 18;
             String dynamicText = name + " " + section;
             ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(dynamicText, headerFont1), centerX, dynamicContentY, 0);
 
