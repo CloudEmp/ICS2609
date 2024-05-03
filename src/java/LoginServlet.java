@@ -141,6 +141,7 @@ public class LoginServlet extends HttpServlet {
                         } else if (!usernameExists(conn, username) && !passwordExists(conn, password)) {
                             response.sendRedirect("error_3.jsp");
                         } else if (usernameExists(conn, username)) {
+                            
                             String query = "SELECT * FROM USER_INFO WHERE username = ?";
                             PreparedStatement pstmt = conn.prepareStatement(query);
                             pstmt.setString(1, username);
@@ -154,7 +155,7 @@ public class LoginServlet extends HttpServlet {
                                 error = 0;
                                 if (dbPassword.equals(password)) {
 
-                                    if (dbUserRole.equals("student")) {
+                                    if (dbUserRole.equals("Student")) {
                                         userrole = "Student";
                                     }
                                     HttpSession session = request.getSession();

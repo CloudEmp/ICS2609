@@ -94,7 +94,7 @@ public class CaptchaServlet extends HttpServlet {
             response.sendRedirect("CourseServlet");
         } else if (captchatext.equals(captcha) && userrole.equals("Student")) {
             session.setAttribute("captchasession", captcha);
-            response.sendRedirect("guest_courses.jsp");
+            response.sendRedirect("StudentServlet");
         } else {
             response.sendRedirect("CaptchaServlet");
         }

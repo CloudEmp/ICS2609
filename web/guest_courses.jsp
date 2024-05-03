@@ -1,9 +1,4 @@
-<%-- 
-    Document   : guest
-    Created on : 04 29, 24, 3:59:00 PM
-    Author     : Micah
---%>
-
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,88 +10,202 @@
             response.sendRedirect("index.jsp");
         } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") == null) {
             response.sendRedirect("CaptchaServlet");
-        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("userrolesession") == "Instructor") {
-            response.sendRedirect("admin_courses.jsp");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("coursessession") == null) {
+            response.sendRedirect("StudentServlet");
         }
+        session.setAttribute("coursessession", null);
     %>
+
+
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Active Learning</title>
-        <link rel="stylesheet" href="css/guest_courses.css">
+
+        <link href="https://db.onlinewebfonts.com/c/7515664cb5fad83d8ce956ad409ccbb7?family=Helvetica+Rounded+LT+Std+Bold" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+        <link rel="stylesheet" href="css/admin_courses.css">
     </head>
-    
+
     <body>
         <h1 class="al">al.</h1>
-        <div class="cover"></div>
-        <div class="bg"></div>
-        
-        <a href="guest_courses.jsp" class="my-course-button">
-            <div class="my-course-box"></div>
-            <span class="mycourses-text">My Courses</span>
-        </a>
 
-        <a href="guest_enrollment.jsp" class="enrollment-button">
-            <div class="enrollment-box"></div>
-            <span class="enrollment-text">Enrollment</span>
-        </a>
-        
-        <div class="profile">
-            <img src="images/pochacco.jpg">
-        </div>
-        
-        <p1 class="hello">Hello, <%= session.getAttribute("username") %>!</p1>
-        <p1 class="role"><%= session.getAttribute("role")%></p1>
-        <div class="line"></div>
-        
-        <div class="navbar-item">
-            <a href="guest_courses.jsp" class="navbar-item-text">
-                <img src="images/courses.png" class="img-courses">
-                Courses
-            </a>
+        <div class="container-course">
+            <p1 class="hello">Hello, <%= session.getAttribute("fullnamesession")%>!</p1>
+            <p1 class="role"><%= session.getAttribute("userrolesession")%></p1>
         </div>
 
-        <div class="navbar-item">
-            <a href="https://activelearning.ph/news/" class="navbar-item-text">
-                <img src="images/news.png" class="img-news">
-                News
-            </a>
+        <div class="container1-course">
+
+            <img id="image-con" src="images/container1-admin.png" class="box" alt="bg image"/>
+            <img id="cover" src="images/cover.png" class="box" alt="cover classroom"/>
+            <img id="profile" src="images/profile.png" class="box" alt="profile picture"/>
+            <img id="line" src="images/line.png" class="box" alt="separator"/>
+
+            <div class="con-item">
+                <div class="navbar-item">
+                    <a href="https://activelearning.ph/courses/" class="navbar-item-text" target="_blank">
+                        <img src="images/book.png" class="img-courses">
+                        Courses
+                    </a>
+                </div>
+
+                <div class="navbar-item">
+                    <a href="https://activelearning.ph/news/" class="navbar-item-text" target="_blank">
+                        <img src="images/news.png" class="img-news">
+                        News
+                    </a>
+                </div>
+
+                <div class="navbar-item">
+                    <a href="https://activelearning.ph/careers/" class="navbar-item-text" target="_blank">
+                        <img src="images/careers.png" class="img-careers">
+                        Careers
+                    </a>
+                </div>
+
+                <div class="navbar-item">
+                    <a href="https://activelearning.ph/about/" class="navbar-item-text" target="_blank">
+                        <img src="images/company.png" class="img-comp">
+                        The Company
+                    </a>
+                </div>
+
+                <div class="navbar-item">
+                    <a href="https://activelearning.ph/contact/" class="navbar-item-text" target="_blank">
+                        <img src="images/contact.png" class="img-contact">
+                        Contact Us
+                    </a>
+                </div>
+
+                <form action="LoginServlet" method="post">
+                    <input id="logout" type="submit" value="logout" name="logout">
+                </form>
+
+            </div>
         </div>
 
-        <div class="navbar-item">
-            <a href="https://activelearning.ph/careers/" class="navbar-item-text">
-                <img src="images/careers.png" class="img-careers">
-                Careers
-            </a>
+
+        <div class="container2-course">
+            <form action="StudentServlet" method="get">
+                <input id="courses" type="submit" name="place" value="MyCourses">
+            </form>
+
+            <form action="StudentServlet" method="get">
+                <input id="enroll" type="submit" name="place" value="Enrollment">
+            </form>
+
+
+
         </div>
 
-        <div class="navbar-item">
-            <a href="https://activelearning.ph/about/" class="navbar-item-text">
-                <img src="images/company.png" class="img-comp">
-                The Company
-            </a>
+        <div  class="container4-course">
+            <img id="image-bg" src="images/bg-admin.png" class="box" alt="bg image"/>
+
         </div>
 
-        <div class="navbar-item">
-            <a href="https://activelearning.ph/contact/" class="navbar-item-text">
-                <img src="images/contactus.png" class="img-contact">
-                Contact Us
-            </a>
-        </div>
 
-        <a href="index.jsp" class="logout-button">
-            <div class="logout-box"></div>
-            <span class="logout-text">Logout</span>
-        </a>
-        
-        <a href="https://activelearning.ph/course/basic-python-training-philippines/">
-        <div class="gc-container-1">
+        <%
+            try {
+                ArrayList<ArrayList<String>> studentCourses = (ArrayList<ArrayList<String>>) request.getAttribute("studentCourses");
+                if (!studentCourses.isEmpty()) {
+                    int counter = 1;
+                    for (ArrayList<String> course : studentCourses) {
+        %>
+
+        <div class="gc-container-<%=counter%>">
+            <a href="https://activelearning.ph/course/basic-python-training-philippines/">  </a>
+
+
             <img src="images/basicpython.png" class="img-python">
-            <p class="gc-python">Basic Python Programming</p>
+            <p class="gc-python"><%= course.get(0)%></p>
             <img src="images/clock.png" class="img-clock">
-            <p class="duration">20 hours</p>      
+            <p class="duration"><%= course.get(1)%> hours</p>      
         </div>
-        </a>
-        
+
+
+        <%
+                        counter++;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        %>
+
+
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>List of Enrolled Students</h2>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            <tr>
+                                <td>Toua Tokuchi</td>
+                                <td>2024-04-30</td>
+                            </tr>
+                            <tr>
+                                <td>Kim Sunoo</td>
+                                <td>2024-04-29</td>
+                            </tr>
+                            <tr>
+                                <td>Hiroki Dan</td>
+                                <td>2024-04-29</td>
+                            </tr>
+                            <tr>
+                                <td>Kim Ji-won</td>
+                                <td>2024-04-29</td>
+                            </tr>
+                            <tr>
+                                <td>Shinichi Izumi</td>
+                                <td>2024-04-29</td>
+                            </tr>
+                            <tr>
+                                <td>Park Bo-young</td>
+                                <td>2024-04-29</td>
+                            </tr>
+                            <tr>
+                                <td>Jeon Wonwoo</td>
+                                <td>2024-04-29</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+
+            function openModal() {
+                document.getElementById('myModal').style.display = "block";
+
+            }
+
+            function closeModal() {
+                document.getElementById('myModal').style.display = "none";
+            }
+        </script>
+
+        <% if (request.getAttribute("enrollmentLimitReached") != null) {%>
+        <script>
+            alert('<%= request.getAttribute("enrollmentLimitReached")%>');
+        </script>
+        <% }%>
+
+
+
     </body>
-    
 </html>
