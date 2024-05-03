@@ -186,6 +186,8 @@ public class StudentServlet extends HttpServlet {
         String instructor = request.getParameter("instructor");
         String stardate = request.getParameter("startdate");
         String enddate = request.getParameter("enddate");
+        String durationhours = request.getParameter("durationhours");
+        
 
         try {
             if (conn.isClosed()) {
@@ -207,7 +209,7 @@ public class StudentServlet extends HttpServlet {
                 //=========================================================================//
                 //Insert data in students_info
                 if (numberOfcourseTaken < 3) {
-                    String insertQuery = "INSERT INTO students_info (student, coursetaken, instructor, startdate, enddate) VALUES (?, ?, ?, ?, ?)";
+                    String insertQuery = "INSERT INTO students_info (student, coursetaken, instructor, startdate, enddate, durationhours) VALUES (?, ?, ?, ?, ?, ?)";
                     PreparedStatement preparedStatement = conn.prepareStatement(insertQuery);
 
                     preparedStatement.setString(1, fullname);
@@ -215,6 +217,7 @@ public class StudentServlet extends HttpServlet {
                     preparedStatement.setString(3, instructor);
                     preparedStatement.setString(4, stardate);
                     preparedStatement.setString(5, enddate);
+                    preparedStatement.setString(6, durationhours);
 
                     int rowsAffected = preparedStatement.executeUpdate();
                     preparedStatement.close();
@@ -246,7 +249,7 @@ public class StudentServlet extends HttpServlet {
             }
 
             //=========================================================================//
-            String getCourses = "SELECT coursetaken, instructor, startdate, enddate FROM students_info WHERE student = ?";
+            String getCourses = "SELECT coursetaken, instructor, startdate, enddate, durationhours FROM students_info WHERE student = ?";
             PreparedStatement Ps = conn.prepareStatement(getCourses);
             Ps.setString(1, fullname);
             ResultSet rs = Ps.executeQuery();
@@ -257,12 +260,14 @@ public class StudentServlet extends HttpServlet {
                 String instructors = rs.getString("instructor");
                 String startdate = rs.getString("startdate");
                 String enddates = rs.getString("enddate");
+                String durationhourss = rs.getString("durationhours");
 
                 ArrayList<String> studentDetails = new ArrayList<>();
                 studentDetails.add(courseName);
                 studentDetails.add(instructors);
                 studentDetails.add(startdate);
                 studentDetails.add(enddates);
+                studentDetails.add(durationhourss);
 
                 students.add(studentDetails);
             }

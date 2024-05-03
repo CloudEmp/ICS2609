@@ -136,7 +136,8 @@
                                         <input type="hidden" name="course" value="<%= course.get(0)%>">
                                         <input type="hidden" name="startdate" value="<%= course.get(1)%>">
                                         <input type="hidden" name="enddate" value="<%= course.get(2)%>">
-                                        <input type="hidden" name="instructor" value="<%= course.get(3)%>">
+                                        <input type="hidden" name="durationhours" value="<%= course.get(3)%>">
+                                        <input type="hidden" name="instructor" value="<%= course.get(4)%>">
                                         <button type="submit" name="enrollCourse" value="enrollCourse" style="border: none; background: none; padding: 0;">
                                             <img src="images/plus.png" alt="add" style="width: 30px; height: 26px;">
                                         </button>                                        
