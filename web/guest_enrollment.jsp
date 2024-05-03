@@ -26,7 +26,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Active Learning</title>
-        <link rel="stylesheet" href="css/guest_enrollment.css">
+        <link rel="stylesheet" href="css/guest_enrollment.css?v=3">
         <link href="https://use.typekit.net/oov2wcw.css" rel="stylesheet">
     </head>
 
