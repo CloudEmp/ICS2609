@@ -150,23 +150,28 @@ public class ReportsPDF extends HttpServlet {
 
         HttpSession session = request.getSession();
         username1 = (String) session.getAttribute("usernamesession");
+        String fullname = (String) session.getAttribute("fullnamesession");
         String password = decrypt((String) session.getAttribute("passwordsession"));
         String report = request.getParameter("reports");
-        String report2 = request.getParameter("reports2");
+        String file = null;
+
+        if (report.equals("All Records")) {
+            file = "ALLRECORDS_";
+        } else if (report.equals("My Record")) {
+            file = "MYRECORD_";
+        } else if (report.equals("Courses")) {
+            file = "COURSELIST_";
+        }
 
         boolean isDownload = Boolean.parseBoolean(request.getParameter("download"));
 
-        response.setContentType("application/pdf");
-        //response.setContentType("application/pdf");
         if (isDownload) {
-            // Set the filename for download
             response.setContentType("application/pdf");
-            String filename = "COURSELIST_" + getTimestamp() + ".pdf";
+            String filename = file + getTimestamp() + ".pdf";
             response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
         }
-
-        // Set the filename for the download
-       
+        
+        response.setContentType("application/pdf");
         ServletOutputStream out = response.getOutputStream();
 
         try {
@@ -192,7 +197,7 @@ public class ReportsPDF extends HttpServlet {
                     String username2 = rs.getString("USERNAME").trim();
                     String userrole1 = rs.getString("USERROLE").trim();
 
-                    if (username2.equals(session.getAttribute("usernamesession"))) {
+                    if (username2.equals(username1)) {
                         username2 += "*"; // Add asterisk to the username
                     }
 
@@ -252,8 +257,10 @@ public class ReportsPDF extends HttpServlet {
                     String courseend = rs.getString("ENDDATE");
                     String duration = rs.getString("DURATIONHOURS");
 
-                    if (instructorname.equals(session.getAttribute("usernamesession"))) {
-                        instructorname += "*"; // Add asterisk to the username
+                    if (instructorname != null) {
+                        if (instructorname.equals(fullname)) {
+                            instructorname += "*"; // Add asterisk to the username
+                        }
                     }
 
                     table.addCell(coursename);
@@ -518,3 +525,5 @@ public class ReportsPDF extends HttpServlet {
 
     }
 }
+
+
