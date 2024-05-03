@@ -115,6 +115,7 @@
 
         <form action="ReportsPDF" method="post" target="pdfFrame">
             <input type="hidden" name="download" value="true">
+            <input id="my-record" class="record-button" type="hidden" value="My Record" name="reports">
             <input id="my-record2" class="record-button2" type="submit" value="↓" name="reports">
         </form>
 
@@ -125,6 +126,7 @@
 
         <form action="ReportsPDF" method="post" target="pdfFrame">
             <input type="hidden" name="download" value="true">
+            <input id="all-records" class="record-button" type="hidden" value="All Records" name="reports">
             <input id="all-records2" class="record-button2" type="submit" value="↓" name="reports">
         </form>
 
@@ -135,6 +137,7 @@
 
         <form action="ReportsPDF" method="post" target="pdfFrame">
             <input type="hidden" name="download" value="true">
+            <input id="courses" class="record-button" type="hidden" value="Courses" name="reports">
             <input id="courses2" class="record-button2" type="submit" value="↓" name="reports">
         </form>
 
