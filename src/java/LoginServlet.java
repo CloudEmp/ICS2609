@@ -154,7 +154,7 @@ public class LoginServlet extends HttpServlet {
                                 error = 0;
                                 if (dbPassword.equals(password)) {
 
-                                    if (dbUserRole.equals("student")) {
+                                    if (dbUserRole.equals("Student")) {
                                         userrole = "Student";
                                     }
                                     HttpSession session = request.getSession();

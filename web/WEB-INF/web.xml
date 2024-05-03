@@ -69,7 +69,6 @@
             <param-value>5</param-value>
         </init-param>
     </servlet>
-    
     <servlet>
         <servlet-name>ReportsPDF</servlet-name>
         <servlet-class>ReportsPDF</servlet-class>
@@ -101,9 +100,10 @@
             <param-name>databasename</param-name>
             <param-value>UserDB</param-value>
         </init-param>
-         <init-param>
+        <init-param>
             <param-name>url1</param-name>
-            <param-value>jdbc:mysql://localhost:3306/coursesdb?useSSL=false</param-value> <!-- Do not change this -->
+            <param-value>jdbc:mysql://localhost:3306/coursesdb?useSSL=false</param-value>
+            <!-- Do not change this -->
         </init-param>
         <init-param>
             <param-name>username1</param-name>
@@ -111,20 +111,21 @@
         </init-param>
         <init-param>
             <param-name>password1</param-name>
-            <param-value>root</param-value>  <!-- Change this -->
+            <param-value>root</param-value>
+            <!-- Change this -->
         </init-param>
         <init-param>
             <param-name>driver1</param-name>
             <param-value>com.mysql.cj.jdbc.Driver</param-value>
         </init-param>
     </servlet>
-    
     <servlet>
         <servlet-name>CourseServlet</servlet-name>
         <servlet-class>CourseServlet</servlet-class>
         <init-param>
             <param-name>url</param-name>
-            <param-value>jdbc:mysql://localhost:3306/coursesdb?useSSL=false</param-value> <!-- Do not change this -->
+            <param-value>jdbc:mysql://localhost:3306/coursesdb?useSSL=false</param-value>
+            <!-- Do not change this -->
         </init-param>
         <init-param>
             <param-name>username</param-name>
@@ -132,20 +133,21 @@
         </init-param>
         <init-param>
             <param-name>password</param-name>
-            <param-value>root</param-value> <!-- Change this -->
+            <param-value>root</param-value>
+            <!-- Change this -->
         </init-param>
         <init-param>
             <param-name>driver</param-name>
             <param-value>com.mysql.cj.jdbc.Driver</param-value>
         </init-param>
     </servlet>
-    
     <servlet>
         <servlet-name>CoursesPDF</servlet-name>
         <servlet-class>CoursesPDF</servlet-class>
         <init-param>
             <param-name>url</param-name>
-            <param-value>jdbc:mysql://localhost:3306/coursesdb?useSSL=false</param-value> <!-- Do not change this -->
+            <param-value>jdbc:mysql://localhost:3306/coursesdb?useSSL=false</param-value>
+            <!-- Do not change this -->
         </init-param>
         <init-param>
             <param-name>username</param-name>
@@ -153,57 +155,74 @@
         </init-param>
         <init-param>
             <param-name>password</param-name>
-            <param-value>root</param-value> <!-- Change this -->
+            <param-value>root</param-value>
+            <!-- Change this -->
         </init-param>
         <init-param>
             <param-name>driver</param-name>
             <param-value>com.mysql.cj.jdbc.Driver</param-value>
         </init-param>
     </servlet>
-    
+    <servlet>
+        <servlet-name>StudentServlet</servlet-name>
+        <servlet-class>StudentServlet</servlet-class>
+        <init-param>
+            <param-name>url</param-name>
+            <param-value>jdbc:mysql://localhost:3306/coursesdb?useSSL=false</param-value>
+            <!-- Do not change this -->
+        </init-param>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>root</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>root</param-value>
+            <!-- Change this -->
+        </init-param>
+        <init-param>
+            <param-name>driver</param-name>
+            <param-value>com.mysql.cj.jdbc.Driver</param-value>
+        </init-param>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-    
     <error-page>
         <error-code>404</error-code>
         <location>/error404.jsp</location>
     </error-page>
-    
     <error-page>
         <exception-type>java.lang.NullPointerException</exception-type>
         <location>/noLoginCredentials.jsp</location>
     </error-page>
-    
     <servlet-mapping>
         <servlet-name>CaptchaServlet</servlet-name>
         <url-pattern>/CaptchaServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ReportsPDF</servlet-name>
         <url-pattern>/ReportsPDF</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>CourseServlet</servlet-name>
         <url-pattern>/CourseServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>CoursesPDF</servlet-name>
         <url-pattern>/CoursesPDF</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>StudentServlet</servlet-name>
+        <url-pattern>/StudentServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             5
         </session-timeout>
     </session-config>
-    
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
 </web-app>
