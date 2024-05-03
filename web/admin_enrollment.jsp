@@ -183,7 +183,7 @@
             <div class="modal-content">
                 <form action="CourseServlet" method="POST">
                     <label for="courseName">Course Name:</label>
-                    <select id="course" name="course" required>
+                    <select id="course" name="course" required style="width: 75%;">
                         <option value="Laravel Framework">Laravel Framework</option>
                         <option value="Advanced Python Programming">Advanced Python Programming</option>
                         <option value="Microsoft Excel Advanced">Microsoft Excel Advanced</option>
