@@ -120,7 +120,7 @@
             <img src="images/basicpython.png" class="img-python">
             <p class="gc-python"><%= course.get(0)%></p>
             <img src="images/clock.png" class="img-clock">
-            <p class="duration"><%= course.get(1)%> hours</p>      
+            <p class="duration"><%= course.get(4)%> hours</p>      
         </div>
 
 
