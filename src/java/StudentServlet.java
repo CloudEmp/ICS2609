@@ -91,6 +91,7 @@ public class StudentServlet extends HttpServlet {
                 init(getServletConfig());
             }
 
+            
             //=========================================================================//
             String selectQuery = "SELECT course, startdate, enddate, durationhours, instructor FROM courses_info "
                     + "WHERE startdate IS NOT NULL AND enddate IS NOT NULL "
