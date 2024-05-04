@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -91,7 +92,6 @@ public class StudentServlet extends HttpServlet {
                 init(getServletConfig());
             }
 
-            
             //=========================================================================//
             String selectQuery = "SELECT course, startdate, enddate, durationhours, instructor FROM courses_info "
                     + "WHERE startdate IS NOT NULL AND enddate IS NOT NULL "
@@ -141,6 +141,24 @@ public class StudentServlet extends HttpServlet {
             }
 
             //=========================================================================//
+            HashMap<String, String> courseDescriptions = new HashMap<>();
+            courseDescriptions.put("Laravel Framework", "Laravel Framework is an open-source PHP class library designed to support the development of dynamic websites, Web applications and Web services. The framework aims to alleviate the overhead associated with common activities used in Web development such as database access, authentication, templating, allowing you to focus on your application’s specific requirements. By the end of the course, students will have completed a secure, Create, Read, Update, Delete (CRUD) application.");
+
+            courseDescriptions.put("Advanced Python Programming", "Python is a widely used, open-source programming language that is especially suited for a wide range of applications including web development, machine learning, and data science. In this Python Programming course, you will learn advanced concepts like Object-Oriented concepts, exception handling and the basics of web application development using Django.");
+
+            courseDescriptions.put("Microsoft Excel Advanced", "In this Microsoft Excel Advanced Training course, you will learn how to maximize Excel even further to help you analyze data quicker. You will learn features like PivotTables, macros, and how to protect your spreadsheets from being misused by others.");
+
+            courseDescriptions.put("User Experience(UX)", "This boot-camp is fast-paced, hands-on and interactive. It has been designed to focus on “learning by doing” rather than “learning by listening”.");
+
+            courseDescriptions.put("CompTIA Security+", "CompTIA Security+ provides a global benchmark for best practices in IT network and operational security, one of the fastest-growing fields in IT.");
+
+            courseDescriptions.put("Microsoft Excel Essentials", "Microsoft Excel is the industry leading tool to help workers work with data on the desktop. This Microsoft Excel training course enables you to become more productive by allowing you to automate data processing essential to your daily work.");
+
+            courseDescriptions.put("ITIL 4 Foundation Certification Program", "ITIL 4 Foundation is designed as an introduction to ITIL 4 and enables candidates to look at IT service management through an end-to-end operating model for the creation, delivery, and continual improvement of tech-enabled products.");
+
+            courseDescriptions.put("Agile Project Management with Scrum", "In this Agile and Scrum training course, you will learn how to apply Agile and Scrum techniques to deliver value to project stakeholders in short amounts of time. ActiveLearning’s Agile Scrum training Through lectures and simulations, this course is ideal if you are looking have a firm foundation of how agile and scrum methodologies can be put into practice. This training will also help you prepare for the Professional Scrum Master (PSM) certification, which is one of the most recognized agile project management certifications in the world.");
+
+            //=========================================================================//
             // Ewan para san to??
             session.setAttribute("coursessession", courses);
 
@@ -149,6 +167,9 @@ public class StudentServlet extends HttpServlet {
 
             // data of all courses of students
             request.setAttribute("studentCourses", students);
+
+            // data for course description
+            request.setAttribute("courseDescriptions", courseDescriptions);
 
             RequestDispatcher dispatcher;
 
@@ -187,7 +208,6 @@ public class StudentServlet extends HttpServlet {
         String stardate = request.getParameter("startdate");
         String enddate = request.getParameter("enddate");
         String durationhours = request.getParameter("durationhours");
-        
 
         try {
             if (conn.isClosed()) {
