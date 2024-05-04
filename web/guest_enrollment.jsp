@@ -4,6 +4,7 @@
     Author     : Micah
 --%>
 
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -124,24 +125,35 @@
                             <%
                                 try {
                                     ArrayList<ArrayList<String>> courses = (ArrayList<ArrayList<String>>) request.getAttribute("allCourses");
+                                    HashMap<String, String> courseDescriptions = (HashMap<String, String>) request.getAttribute("courseDescriptions");
                                     for (ArrayList<String> course : courses) {
+                                        String courseName = course.get(0);
+                                        String startDate = course.get(1);
+                                        String endDate = course.get(2);
+                                        String durationHours = course.get(3);
+                                        String instructor = course.get(4);
+                                        String description = courseDescriptions.get(courseName);
                             %>
                             <tr>
-                                <td class="course-name"> <img src="images/dropdown.png" class="img-dropdown"> <strong> <%= course.get(0)%> </strong> </td>
-                                <td><%= course.get(1)%></td>
-                                <td><%= course.get(2)%></td>
-
+                                <td class="course-name"> <img src="images/dropdown.png" class="img-dropdown"> <strong> <%= courseName%> </strong> </td>
+                                <td><%= startDate%></td>
+                                <td><%= endDate%></td>
                                 <td>
                                     <form action="StudentServlet" method="POST">
-                                        <input type="hidden" name="course" value="<%= course.get(0)%>">
-                                        <input type="hidden" name="startdate" value="<%= course.get(1)%>">
-                                        <input type="hidden" name="enddate" value="<%= course.get(2)%>">
-                                        <input type="hidden" name="durationhours" value="<%= course.get(3)%>">
-                                        <input type="hidden" name="instructor" value="<%= course.get(4)%>">
+                                        <input type="hidden" name="course" value="<%= courseName%>">
+                                        <input type="hidden" name="startdate" value="<%= startDate%>">
+                                        <input type="hidden" name="enddate" value="<%= endDate%>">
+                                        <input type="hidden" name="durationhours" value="<%= durationHours%>">
+                                        <input type="hidden" name="instructor" value="<%= instructor%>">
                                         <button type="submit" name="enrollCourse" value="enrollCourse" style="border: none; background: none; padding: 0;">
                                             <img src="images/plus.png" alt="add" style="width: 30px; height: 26px;">
                                         </button>                                        
                                     </form>
+                                </td>
+                            </tr>
+                            <tr class="course-description" style="display: none;">
+                                <td colspan="4">
+                                    <p><%= description%></p>
                                 </td>
                             </tr>
                             <%
@@ -150,7 +162,6 @@
                                     e.printStackTrace();
                                 }
                             %>
-
                         </tbody>
                     </table>
                 </section>
