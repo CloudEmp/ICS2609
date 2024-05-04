@@ -119,7 +119,7 @@ public class StudentServlet extends HttpServlet {
             }
 
             //=========================================================================//
-            String getCourses = "SELECT coursetaken, instructor, startdate, enddate FROM students_info WHERE student = ?";
+            String getCourses = "SELECT coursetaken, instructor, startdate, enddate, durationhours FROM students_info WHERE student = ?";
             PreparedStatement Ps = conn.prepareStatement(getCourses);
             Ps.setString(1, fullname);
             ResultSet rs = Ps.executeQuery();
@@ -127,15 +127,17 @@ public class StudentServlet extends HttpServlet {
 
             while (rs.next()) {
                 String courseName = rs.getString("coursetaken");
-                String instructor = rs.getString("instructor");
+                String instructors = rs.getString("instructor");
                 String startdate = rs.getString("startdate");
-                String enddate = rs.getString("enddate");
+                String enddates = rs.getString("enddate");
+                String durationhourss = rs.getString("durationhours");
 
                 ArrayList<String> studentDetails = new ArrayList<>();
                 studentDetails.add(courseName);
-                studentDetails.add(instructor);
+                studentDetails.add(instructors);
                 studentDetails.add(startdate);
-                studentDetails.add(enddate);
+                studentDetails.add(enddates);
+                studentDetails.add(durationhourss);
 
                 students.add(studentDetails);
             }
@@ -213,38 +215,45 @@ public class StudentServlet extends HttpServlet {
             if (conn.isClosed()) {
                 init(getServletConfig());
             }
-            //Check number allowed number of courses
+            
             if (selectedAction.equals("enrollCourse")) {
-                String countQuery = "SELECT COUNT(*) FROM students_info WHERE student = ?";
-                PreparedStatement countPs = conn.prepareStatement(countQuery);
-                countPs.setString(1, fullname);
-                ResultSet countResult = countPs.executeQuery();
-                int numberOfcourseTaken = 0;
-                if (countResult.next()) {
-                    numberOfcourseTaken = countResult.getInt(1);
-                }
-                countResult.close();
-                countPs.close();
-
+                String checkTakenQuery = "SELECT * FROM students_info WHERE student = ? AND coursetaken = ?";
+                PreparedStatement checkTakenPs = conn.prepareStatement(checkTakenQuery);
+                checkTakenPs.setString(1, fullname);
+                checkTakenPs.setString(2, takenCourse);
+                ResultSet checkTakenResult = checkTakenPs.executeQuery();
                 //=========================================================================//
-                //Insert data in students_info
-                if (numberOfcourseTaken < 3) {
-                    String insertQuery = "INSERT INTO students_info (student, coursetaken, instructor, startdate, enddate, durationhours) VALUES (?, ?, ?, ?, ?, ?)";
-                    PreparedStatement preparedStatement = conn.prepareStatement(insertQuery);
-
-                    preparedStatement.setString(1, fullname);
-                    preparedStatement.setString(2, takenCourse);
-                    preparedStatement.setString(3, instructor);
-                    preparedStatement.setString(4, stardate);
-                    preparedStatement.setString(5, enddate);
-                    preparedStatement.setString(6, durationhours);
-
-                    int rowsAffected = preparedStatement.executeUpdate();
-                    preparedStatement.close();
+                if (checkTakenResult.next()) {
                 } else {
+                    // 
+                    String countQuery = "SELECT COUNT(*) FROM students_info WHERE student = ?";
+                    PreparedStatement countPs = conn.prepareStatement(countQuery);
+                    countPs.setString(1, fullname);
+                    ResultSet countResult = countPs.executeQuery();
+                    int numberOfCoursesTaken = 0;
+                    if (countResult.next()) {
+                        numberOfCoursesTaken = countResult.getInt(1);
+                    }
+                    countResult.close();
+                    countPs.close();
 
-                    request.setAttribute("enrollmentLimitReached", "You have reached the Enrollment limit.");
+                    //=========================================================================//
+                    if (numberOfCoursesTaken < 3) {
+                        String insertQuery = "INSERT INTO students_info (student, coursetaken, instructor, startdate, enddate, durationhours) VALUES (?, ?, ?, ?, ?, ?)";
+                        PreparedStatement insertPs = conn.prepareStatement(insertQuery);
+                        insertPs.setString(1, fullname);
+                        insertPs.setString(2, takenCourse);
+                        insertPs.setString(3, instructor);
+                        insertPs.setString(4, stardate);
+                        insertPs.setString(5, enddate);
+                        insertPs.setString(6, durationhours);
+                        int rowsAffected = insertPs.executeUpdate();
+                    } else {
+                        request.setAttribute("enrollmentLimitReached", "You have reached the enrollment limit (3 courses).");
+                    }
                 }
+                checkTakenResult.close();
+                checkTakenPs.close();
             }
             //=========================================================================//
 
