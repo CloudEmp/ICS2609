@@ -255,7 +255,7 @@ a:hover {
 .gc-container-1 {
     position: fixed;
     width: 250px;
-    height: 240px;
+    height: 280px;
     margin: 126px 0px 0px 308px;
     padding: 23px 21px 15px 20px;
     border-radius: 20px;
@@ -299,16 +299,16 @@ a:hover {
 
 .gc-python {
     position: fixed;
-    width: 429px;
+    width: 220px;
     height: 72px;
-    margin: 180px 0 0 -100px;
+    margin: 180px 0 0 2px;
     font-size: 18px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    text-align: center;
+    text-align: left;
     color: #1e293b;
 }
 
@@ -316,7 +316,7 @@ a:hover {
     position: fixed;
     width: 32px;
     height: 29px;
-    margin: 215px 0 0 -135px;
+    margin: 245px 0 0 -135px;
 }
 
 
@@ -324,7 +324,7 @@ a:hover {
     position: fixed;
     width: 429px;
     height: 72px;
-    margin: 220px 0 0 30px;
+    margin: 250px 0 0 30px;
     font-family: "Century Gothic";
     font-size: 16px;
     font-weight: bold;
@@ -340,13 +340,13 @@ a:hover {
     position: fixed;
     width: 32px;
     height: 29px;
-    margin: 215px 0 0 98px;
+    margin: 245px 0 0 98px;
 }
 
 .gc-container-2 {
     position: fixed;
     width: 250px;
-    height: 240px;
+    height: 280px;
     margin: 126px 0 0 625px;
     padding: 23px 21px 15px 20px;
     border-radius: 20px;
@@ -358,7 +358,7 @@ a:hover {
 .gc-container-3 {
     position: fixed;
     width: 250px;
-    height: 240px;
+    height: 280px;
     margin: 126px 0 0 942px;
     padding: 23px 21px 15px 20px;
     border-radius: 20px;
