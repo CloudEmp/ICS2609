@@ -29,6 +29,20 @@
         <title>Active Learning</title>
         <link rel="stylesheet" href="css/guest_enrollment.css?v=3">
         <link href="https://use.typekit.net/oov2wcw.css" rel="stylesheet">
+        <style>
+            .modal-content {
+                background-image: url(images/classroom.png);
+                background-size: cover;
+                border-radius: 15px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                width: 400px;
+                padding: 30px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
     </head>
 
     <body>
@@ -56,16 +70,14 @@
 
         <div class="left-container">
             <img id="image-con" src="images/container1-admin.png" class="box" alt="bg image"/>       
-            <div class="cover"></div>
-            <div class="profile">
-                <img src="images/image 27.png">
-            </div>
-            <div class="line"></div> 
+            <img id="cover" src="images/cover.png" class="box" alt="cover classroom"/>
+            <img id="profile" src="images/profile.png" class="box" alt="profile picture"/>
+            <img id="line" src="images/line.png" class="box" alt="separator"/>
 
             <div class="con-item">
                 <div class="navbar-item">
                     <a href="guest_courses.jsp" class="navbar-item-text">
-                        <img src="images/courses.png" class="img-courses">
+                        <img src="images/book.png" class="img-courses">
                         Courses
                     </a>
                 </div>
@@ -93,13 +105,13 @@
 
                 <div class="navbar-item">
                     <a href="https://activelearning.ph/contact/" class="navbar-item-text">
-                        <img src="images/contactus.png" class="img-contact">
+                        <img src="images/contact.png" class="img-contact">
                         Contact Us
                     </a>
                 </div>
 
                 <form action="LoginServlet" method="post">
-                    <input id="logout" type="submit" value="logout" name="logout">
+                    <input id="logout" type="submit" value="Logout" name="logout">
                 </form>   
             </div>
         </div>

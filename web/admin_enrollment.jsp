@@ -98,7 +98,7 @@
                 </div>
 
                 <form action="LoginServlet" method="post">
-                    <input id="logout" type="submit" value="logout" name="logout">
+                    <input id="logout" type="submit" value="Logout" name="logout">
                 </form>
 
             </div>
