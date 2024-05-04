@@ -79,7 +79,7 @@
                 </div>
 
                 <form action="LoginServlet" method="post">
-                    <input id="logout" type="submit" value="logout" name="logout">
+                    <input id="logout" type="submit" value="Logout" name="logout">
                 </form>
 
             </div>
@@ -112,7 +112,6 @@
                     int counter = 1;
                     for (ArrayList<String> course : studentCourses) {
         %>
-
         <div class="gc-container-<%=counter%>">
             <a href="https://activelearning.ph/course/basic-python-training-philippines/" target="_blank">
             <img src="images/basicpython.png" class="img-python"></a>
@@ -120,8 +119,6 @@
             <img src="images/clock.png" class="img-clock">
             <p class="duration"><%= course.get(4)%> hours</p>      
         </div>
-
-
         <%
                         counter++;
                     }

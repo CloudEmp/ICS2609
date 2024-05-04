@@ -7,13 +7,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : Micah
 */
 
+        * {
+            font-family: century gothic;
+        }
+        
         body {
             margin: 0;
             font-family: "Century Gothic";
             background-color: white;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
         }
         
         .bg {
@@ -22,15 +23,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            width: 100%;
-            height: 100%;
+            width: 2000px;
+            height: 906px;
             margin-top: 15px;
             margin-left: 250px;
-            box-shadow: inset 10px 4px 7px 0 rgba(0, 0, 0, 0.25);
-            z-index: -1;
+            z-index: -2;
+            box-shadow: inset -10px 4px 10px 0px rgba(0, 0, 0, 0.25);
         }
         
+        .mainbg {
+            position: fixed;
+            top: 81px;
+            right: 0px;
+            left:0px;
+            bottom: 0px;
+            z-index: -2;
+            width: 3000px;
+            height: 906px;
+        }
+
         .al {
+            position: fixed;
             width: 377px;
             height: 67px;
             margin: 15px 103px 0 30px;
@@ -43,81 +56,73 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             letter-spacing: normal;
             text-align: left;
             color: #fff;
-            z-index: 1; 
-          }
-          
-        .my-course-box {
-            position: fixed;
-            width: 200px;
-            height: 55px;
-            margin: -35px 539px 857px 240px;
-            border-radius: 15px;
-            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-            border: solid 1px #000;
-            background-color: #1E293B;  
-            z-index: -2;
+            z-index: 2;
         }
-        
-        .mycourses-text {
-            position: fixed;
-            width: 200px;
-            height: 50px;
-            margin: -25px 539px 857px 245px;
-            font-family: "Century Gothic";
-            font-size: 22px;
-            font-weight: bold;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            text-align: center;
-            color: #fff;
+          
+        .container2-course {
+            position: relative;
+            right: 0;
+            top: 0;
+            width: 1300px;
+            height: 95px;
             z-index: 1;
         }
-        
-        .enrollment-box {
+
+        .container2-course #courses{
             position: fixed;
-            width: 200px;
-            height: 55px;
-            margin: -35px 539px 857px 415px;
-            border-radius: 15px;
-            background-color: rgba(30, 41, 59, 0.66);
-            z-index: -2;
-        }
-        
-        .enrollment-text {
-            position: fixed;
-            width: 200px;
+            width: 240px;
             height: 50px;
-            margin: -25px 539px 857px 415px;
-            font-family: "Century Gothic";
-            font-size: 22px;
-            font-weight: bold;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            text-align: center;
-            color: #fff;
-        }
-          
-        .my-course-button:hover .mycourses-text,
-        .enrollment-button:hover .enrollment-text {
-            color: #A8BCDD;
-            opacity: 0.3;
-            transition: color 0.3s ease, opacity 0.3s ease;       
+            background: #1E293B;
+            border-radius: 20px 20px 0px 0px;
+            border: 1px black solid;
+            top: 46px;
+            left: 240px;
+            font-weight: 600;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
         }
 
+        .container2-course #enroll{
+            position: fixed;
+            width: 280px;
+            height: 50px;
+            background: #6B717D;
+            border-radius: 20px 20px 0px 0px;
+            border: 1px black solid;
+            top: 46px;
+            left: 420px;
+            z-index: -1;
+            font-weight: 600;
+            color: white;
+            font-size: 25px;
+            padding-left: 55px;
+            cursor: pointer;
+        }
+
+        #enroll:hover {
+            background-color: #9F79C7;
+        }
+
+        .left-container #image-con  {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            background: white;
+            min-height: 100vh;
+        }
+          
         .cover {
             position: fixed;
             background-image: url('../images/cover.png');
             background-size: 309px 248px;
             width: 309px;
             height: 248px;
-            margin: -150px 103px 0 -58px;
-            border-radius: 25px;
+            margin: -160px 103px 0 -58px;
+            border-radius: 0 0 20px 0px;
             box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-            z-index: -1;
+            z-index: 1;
         }
         
         .profile {
@@ -125,6 +130,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             width: 100%;
             height: 100vh;
             display: flex;
+            z-index: 2;
         }
         
         .profile img {
@@ -133,77 +139,78 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             width: 120px;
             border-radius: 50%;
             border: solid 10px #1e293b;
-            margin: 15px 103px 0 50px;
+            margin:3px 103px 0 50px;
         }
         
         .hello {
             position: fixed;
             color: #1e293b;
-            font-size: 30px;
+            font-size: 27px;
             font-weight: bold;
             font-stretch: normal;
             font-style: normal;
             line-height: normal;
             letter-spacing: normal;
-            font-family: "Century Gothic";
-            margin: 160px 103px 0 50px;
+            margin: 0;
+            top: 245px;
         }
         
         .role {
             position: fixed;
             color: rgba(30, 41, 59, 0.5);
-            font-size: 25px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            font-family: "Century Gothic";
-            margin: 200px 103px 0 100px;
+            font-size: 23px;
+            top: 277px;
+
         }
         
+        .container-course {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+            height: 0px;
+        }
+
         .line {
             width: 200px;
             height: 1px;
             background-color: #9c9a9a;
-            margin: 250px 103px 0 25px;
+            position: fixed;
+            left: 24px;
+            top:  320px;
         }
         
-        .logout-box {
+        .con-item #logout {
             position: fixed;
+            left: 0;
+            bottom: 0;
             width: 250px;
-            height: 65px;
-            margin-top: 60px;
-            margin-left: -0.5px;
-            border-radius: 20px;
-            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-            border: solid 1px #000;
-            background-color: #1E293B;
-        }
-        
-        .logout-text {
-            position: fixed;
-            width: 200px;
-            height: 50px;
-            margin-top: 73px;
-            margin-left: 23px;
-            font-family: "Century Gothic";
-            font-size: 20px;
-            font-weight: bold;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            text-align: center;
-            color: #fff;
+            height: 61px;
+            background: #1E293B;
+            border-radius: 20px 20px 0px 0px;
+            border: 1px black solid;
+            font-weight: 600;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
             text-decoration: underline;
         }
-        
-         .logout-button:hover .logout-text {
-            color: #A8BCDD;
-            opacity: 0.5; 
+
+        #logout:hover {
+            background-color: #9F79C7; 
         }
         
+        .con-item {
+            position: fixed;
+            top: 320px;
+            z-index: 2;
+        }
+
         .navbar-item {
             display: flex;
             align-items: center;
@@ -237,17 +244,42 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         a:hover {
             color: #A8BCDD;
         }
-        
+
         .gc-container-1 {
             position: fixed;
             width: 250px;
             height: 240px;
-            margin: -450px 539px 857px 315px;
+            margin: 39px 0px 0px 315px;
             padding: 23px 21px 15px 20px;
             border-radius: 20px;
             box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
             background-color: #fff;
             transition: transform 0.3s ease-in-out; 
+            z-index: 2;
+        }
+        
+        .gc-container-2 {
+            position: fixed;
+            width: 250px;
+            height: 280px;
+            margin: 126px 0 0 625px;
+            padding: 23px 21px 15px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+            background-color: #fff;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gc-container-3 {
+            position: fixed;
+            width: 250px;
+            height: 280px;
+            margin: 126px 0 0 942px;
+            padding: 23px 21px 15px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+            background-color: #fff;
+            transition: transform 0.3s ease-in-out;
         }
 
         .gc-container-1:hover {
