@@ -208,6 +208,10 @@ public class CourseServlet extends HttpServlet {
                 ps.setString(1, selectedCourse);
                 ps.setString(2, fullname);
                 int rowsUpdated = ps.executeUpdate();
+                updateQuery = "DELETE FROM students_info WHERE coursetaken = ?";
+                ps = conn.prepareStatement(updateQuery);
+                ps.setString(1, selectedCourse);
+                rowsUpdated = ps.executeUpdate();
                 ps.close();
             }
 
