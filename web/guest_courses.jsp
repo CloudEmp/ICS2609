@@ -114,10 +114,8 @@
         %>
 
         <div class="gc-container-<%=counter%>">
-            <a href="https://activelearning.ph/course/basic-python-training-philippines/">  </a>
-
-
-            <img src="images/basicpython.png" class="img-python">
+            <a href="https://activelearning.ph/course/basic-python-training-philippines/" target="_blank">
+            <img src="images/basicpython.png" class="img-python"></a>
             <p class="gc-python"><%= course.get(0)%></p>
             <img src="images/clock.png" class="img-clock">
             <p class="duration"><%= course.get(4)%> hours</p>      

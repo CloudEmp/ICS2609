@@ -89,7 +89,7 @@ public class CourseServlet extends HttpServlet {
                 init(getServletConfig());
             }
 
-            String selectQuery = "SELECT course, startdate, enddate, durationhours FROM courses_info WHERE instructor = ?";
+            String selectQuery = "SELECT course, startdate, enddate, durationhours, link, img FROM courses_info WHERE instructor = ?";
             PreparedStatement selectPs = conn.prepareStatement(selectQuery);
             selectPs.setString(1, fullname);
             ResultSet resultSet = selectPs.executeQuery();
@@ -102,14 +102,19 @@ public class CourseServlet extends HttpServlet {
                 String startDate = resultSet.getString("startdate");
                 String endDate = resultSet.getString("enddate");
                 String duration = resultSet.getString("durationhours");
+                String link = resultSet.getString("link");
+                String img = resultSet.getString("img");
 
                 ArrayList<String> courseDetails = new ArrayList<>();
                 courseDetails.add(courseName);
                 courseDetails.add(startDate);
                 courseDetails.add(endDate);
                 courseDetails.add(duration);
-
+                courseDetails.add(link);
+                courseDetails.add(img);
+                
                 courses.add(courseDetails);
+               
             }
 
             session.setAttribute("coursessession", courses);
