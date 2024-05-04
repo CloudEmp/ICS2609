@@ -93,6 +93,7 @@ public class CourseServlet extends HttpServlet {
             PreparedStatement selectPs = conn.prepareStatement(selectQuery);
             selectPs.setString(1, fullname);
             ResultSet resultSet = selectPs.executeQuery();
+            
 
             ArrayList<ArrayList<String>> courses = new ArrayList<>();
 
