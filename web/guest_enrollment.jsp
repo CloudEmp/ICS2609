@@ -144,6 +144,8 @@
                                         String endDate = course.get(2);
                                         String durationHours = course.get(3);
                                         String instructor = course.get(4);
+                                         String link = course.get(5);
+                                        String img = course.get(6);
                                         String description = courseDescriptions.get(courseName);
                             %>
                             <tr>
@@ -157,6 +159,8 @@
                                         <input type="hidden" name="enddate" value="<%= endDate%>">
                                         <input type="hidden" name="durationhours" value="<%= durationHours%>">
                                         <input type="hidden" name="instructor" value="<%= instructor%>">
+                                        <input type="hidden" name="link" value="<%= link%>">
+                                        <input type="hidden" name="img" value="<%= img%>">
                                         <button type="submit" name="enrollCourse" value="enrollCourse" style="border: none; background: none; padding: 0;">
                                             <img src="images/plus.png" alt="add" style="width: 30px; height: 26px;">
                                         </button>                                        

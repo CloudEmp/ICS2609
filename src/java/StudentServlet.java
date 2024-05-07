@@ -93,7 +93,7 @@ public class StudentServlet extends HttpServlet {
             }
 
             //=========================================================================//
-            String selectQuery = "SELECT course, startdate, enddate, durationhours, instructor FROM courses_info "
+            String selectQuery = "SELECT course, startdate, enddate, durationhours, instructor, link, img FROM courses_info "
                     + "WHERE startdate IS NOT NULL AND enddate IS NOT NULL "
                     + "AND course NOT IN (SELECT coursetaken FROM students_info WHERE student = ?)";
             PreparedStatement selectPs = conn.prepareStatement(selectQuery);
@@ -105,21 +105,25 @@ public class StudentServlet extends HttpServlet {
                 String courseName = resultSet.getString("course");
                 String startDate = resultSet.getString("startdate");
                 String endDate = resultSet.getString("enddate");
-                String durationHours = resultSet.getString("durationhours");
-                String instructor = resultSet.getString("instructor");
+                String instructors = resultSet.getString("instructor");
+                String durationhours = resultSet.getString("durationhours");
+                String link = resultSet.getString("link");
+                String img = resultSet.getString("img");
 
                 ArrayList<String> courseDetails = new ArrayList<>();
                 courseDetails.add(courseName);
                 courseDetails.add(startDate);
                 courseDetails.add(endDate);
-                courseDetails.add(durationHours);
-                courseDetails.add(instructor);
+                courseDetails.add(durationhours);
+                courseDetails.add(instructors);
+                courseDetails.add(link);
+                courseDetails.add(img);
 
                 courses.add(courseDetails);
             }
 
             //=========================================================================//
-            String getCourses = "SELECT coursetaken, instructor, startdate, enddate, durationhours FROM students_info WHERE student = ?";
+            String getCourses = "SELECT coursetaken, instructor, startdate, enddate, durationhours, link, img FROM students_info WHERE student = ?";
             PreparedStatement Ps = conn.prepareStatement(getCourses);
             Ps.setString(1, fullname);
             ResultSet rs = Ps.executeQuery();
@@ -131,6 +135,8 @@ public class StudentServlet extends HttpServlet {
                 String startdate = rs.getString("startdate");
                 String enddates = rs.getString("enddate");
                 String durationhourss = rs.getString("durationhours");
+                String studentlinkss = rs.getString("link");
+                String studentimgs = rs.getString("img");
 
                 ArrayList<String> studentDetails = new ArrayList<>();
                 studentDetails.add(courseName);
@@ -138,6 +144,8 @@ public class StudentServlet extends HttpServlet {
                 studentDetails.add(startdate);
                 studentDetails.add(enddates);
                 studentDetails.add(durationhourss);
+                studentDetails.add(studentlinkss);
+                studentDetails.add(studentimgs);
 
                 students.add(studentDetails);
             }
@@ -210,6 +218,8 @@ public class StudentServlet extends HttpServlet {
         String stardate = request.getParameter("startdate");
         String enddate = request.getParameter("enddate");
         String durationhours = request.getParameter("durationhours");
+        String studentlink = request.getParameter("link");
+        String studentimg = request.getParameter("img");
 
         try {
             if (conn.isClosed()) {
@@ -239,7 +249,7 @@ public class StudentServlet extends HttpServlet {
 
                     //=========================================================================//
                     if (numberOfCoursesTaken < 3) {
-                        String insertQuery = "INSERT INTO students_info (student, coursetaken, instructor, startdate, enddate, durationhours) VALUES (?, ?, ?, ?, ?, ?)";
+                        String insertQuery = "INSERT INTO students_info (student, coursetaken, instructor, startdate, enddate, durationhours, link, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                         PreparedStatement insertPs = conn.prepareStatement(insertQuery);
                         insertPs.setString(1, fullname);
                         insertPs.setString(2, takenCourse);
@@ -247,6 +257,8 @@ public class StudentServlet extends HttpServlet {
                         insertPs.setString(4, stardate);
                         insertPs.setString(5, enddate);
                         insertPs.setString(6, durationhours);
+                        insertPs.setString(7, studentlink);
+                        insertPs.setString(8, studentimg);
                         int rowsAffected = insertPs.executeUpdate();
                     } else {
                         request.setAttribute("enrollmentLimitReached", "You have reached the enrollment limit (3 courses).");
@@ -257,7 +269,7 @@ public class StudentServlet extends HttpServlet {
             }
             //=========================================================================//
 
-            String selectQuery = "SELECT course, startdate, enddate, instructor FROM courses_info WHERE startdate IS NOT NULL AND enddate IS NOT NULL";
+            String selectQuery = "SELECT course, startdate, enddate, instructor, link, img FROM courses_info WHERE startdate IS NOT NULL AND enddate IS NOT NULL";
             PreparedStatement selectPs = conn.prepareStatement(selectQuery);
             ResultSet resultSet = selectPs.executeQuery();
             ArrayList<ArrayList<String>> courses = new ArrayList<>();
@@ -267,18 +279,22 @@ public class StudentServlet extends HttpServlet {
                 String startDate = resultSet.getString("startdate");
                 String endDate = resultSet.getString("enddate");
                 String instructors = resultSet.getString("instructor");
+                String link = resultSet.getString("link");
+                String img = resultSet.getString("img");
 
                 ArrayList<String> courseDetails = new ArrayList<>();
                 courseDetails.add(courseName);
                 courseDetails.add(startDate);
                 courseDetails.add(endDate);
                 courseDetails.add(instructor);
+                courseDetails.add(link);
+                courseDetails.add(img);
 
                 courses.add(courseDetails);
             }
 
             //=========================================================================//
-            String getCourses = "SELECT coursetaken, instructor, startdate, enddate, durationhours FROM students_info WHERE student = ?";
+            String getCourses = "SELECT coursetaken, instructor, startdate, enddate, durationhours, link, img FROM students_info WHERE student = ?";
             PreparedStatement Ps = conn.prepareStatement(getCourses);
             Ps.setString(1, fullname);
             ResultSet rs = Ps.executeQuery();
@@ -290,6 +306,8 @@ public class StudentServlet extends HttpServlet {
                 String startdate = rs.getString("startdate");
                 String enddates = rs.getString("enddate");
                 String durationhourss = rs.getString("durationhours");
+                String studentlinkss = rs.getString("link");
+                String studentimgs = rs.getString("img");
 
                 ArrayList<String> studentDetails = new ArrayList<>();
                 studentDetails.add(courseName);
@@ -297,6 +315,8 @@ public class StudentServlet extends HttpServlet {
                 studentDetails.add(startdate);
                 studentDetails.add(enddates);
                 studentDetails.add(durationhourss);
+                studentDetails.add(studentlinkss);
+                studentDetails.add(studentimgs);
 
                 students.add(studentDetails);
             }
