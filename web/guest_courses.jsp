@@ -198,11 +198,18 @@
             }
         </script>
 
-        <% if (request.getAttribute("enrollmentLimitReached") != null) {%>
+       <%
+            String enrollmentLimitReached = (String) session.getAttribute("enrollmentLimitReached");
+            if (enrollmentLimitReached != null) {
+        %>
         <script>
-            alert('<%= request.getAttribute("enrollmentLimitReached")%>');
+    alert('<%= enrollmentLimitReached%>');
         </script>
-        <% }%>
+        <%
+                session.removeAttribute("enrollmentLimitReached");
+            }
+        %>
+
 
 
     <div id="footer"
