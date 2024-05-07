@@ -24,10 +24,14 @@
 
         <link href="https://db.onlinewebfonts.com/c/7515664cb5fad83d8ce956ad409ccbb7?family=Helvetica+Rounded+LT+Std+Bold" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-        <link rel="stylesheet" href="css/admin_courses.css">
+        <link rel="stylesheet" href="css/guest_courses.css">
     </head>
 
     <body>
+         <div id="header">
+            <p style="font-family: Courier New;"><% out.print(getServletContext().getInitParameter("name")); %> <% out.print(getServletContext().getInitParameter("section"));%></p>
+        </div>
+        
         <h1 class="al">al.</h1>
 
         <div class="container-course">
@@ -45,7 +49,7 @@
             <div class="con-item">
                 <div class="navbar-item">
                     <a href="https://activelearning.ph/courses/" class="navbar-item-text" target="_blank">
-                        <img src="images/book.png" class="img-courses">
+                        <img src="images/courses.png" class="img-courses">
                         Courses
                     </a>
                 </div>
@@ -73,7 +77,7 @@
 
                 <div class="navbar-item">
                     <a href="https://activelearning.ph/contact/" class="navbar-item-text" target="_blank">
-                        <img src="images/contact.png" class="img-contact">
+                        <img src="images/contactus.png" class="img-contact">
                         Contact Us
                     </a>
                 </div>
@@ -201,6 +205,8 @@
         <% }%>
 
 
-
+    <div id="footer"
+             <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
+    </div>
     </body>
 </html>
