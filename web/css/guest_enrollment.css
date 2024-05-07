@@ -15,6 +15,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             margin: 0;
             font-family: "Century Gothic";
             background-color: white;
+             text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         .bg {
@@ -59,29 +63,36 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             z-index: 2;
         }
           
+        .container1-course {
+            z-index: 1;
+        }
+
         .container2-course {
             position: relative;
             right: 0;
             top: 0;
-            width: 1300px;
+            width: 100%;
             height: 95px;
-            z-index: 1;
-        }
 
+
+        }
+        
         .container2-course #courses{
             position: fixed;
-            width: 240px;
+            width: 230px;
             height: 50px;
             background: #6B717D;
-            border-radius: 20px 20px 0px 0px;
+            border-radius: 0px 20px 0px 0px;
             border: 1px black solid;
             top: 46px;
-            left: 240px;
+            left: 250px;
             font-weight: 600;
             color: white;
             font-size: 25px;
             cursor: pointer;
+            z-index: 2;
         }
+
 
         .container2-course #enroll{
             position: fixed;
@@ -137,25 +148,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         }
         
         .hello {
-            position: fixed;
-            color: #1e293b;
-            font-size: 27px;
-            font-weight: bold;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            margin: 0;
-            top: 245px;
-        }
-        
-        .role {
-            position: fixed;
-            color: rgba(30, 41, 59, 0.5);
-            font-size: 23px;
-            top: 277px;
+          position: fixed;
+          color: #1e293b;
+          font-size: 25px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          margin: 0;
+          top: 245px;
+      }
 
-        }
+      .role {
+          position: fixed;
+          color: rgba(30, 41, 59, 0.5);
+          font-size: 20px;
+          top: 287px;
+
+      }
         
         .container-course {
             position: fixed;
@@ -354,5 +365,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         }
 
 
+#header {
+    font-style: italic;
+    color: rgba(30, 41, 59, 0.50);
+    margin-top: 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 70px;
+    right: 0;
+}
 
+#footer {
+    font-style: italic;
+    color: rgba(30, 41, 59, 0.50);
+    margin-top: auto;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 60px;
+    right: 0;
+
+}
 

@@ -46,6 +46,9 @@
     </head>
 
     <body>
+         <div id="header">
+            <p style="font-family: Courier New;"><% out.print(getServletContext().getInitParameter("name")); %> <% out.print(getServletContext().getInitParameter("section"));%></p>
+        </div>
         <h1 class="al">al.</h1>
         <div class="mainbg">
             <div class="bg"></div>
@@ -77,7 +80,7 @@
             <div class="con-item">
                 <div class="navbar-item">
                     <a href="guest_courses.jsp" class="navbar-item-text">
-                        <img src="images/book.png" class="img-courses">
+                        <img src="images/courses.png" class="img-courses">
                         Courses
                     </a>
                 </div>
@@ -105,7 +108,7 @@
 
                 <div class="navbar-item">
                     <a href="https://activelearning.ph/contact/" class="navbar-item-text">
-                        <img src="images/contact.png" class="img-contact">
+                        <img src="images/contactus.png" class="img-contact">
                         Contact Us
                     </a>
                 </div>
@@ -203,7 +206,9 @@
         </script>
 
 
-
+    <div id="footer"
+             <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
+    </div>
     </body>
 
 </html>
