@@ -29,6 +29,9 @@
     </head>
 
     <body>
+        <div id="header">
+            <p style="font-family: Courier New;"><% out.print(getServletContext().getInitParameter("name")); %> <% out.print(getServletContext().getInitParameter("section"));%></p>
+        </div>
         <h1 class="al">al.</h1>
 
         <div class="container-course">
@@ -80,7 +83,7 @@
                 </div>
 
                 <form action="LoginServlet" method="post">
-                    <input id="logout" type="submit" value="logout" name="logout">
+                    <input id="logout" type="submit" value="Logout" name="logout">
                 </form>
 
             </div>
@@ -159,5 +162,8 @@
 
     </div>
 
+    <div id="footer"
+         <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
+</div>
 </body>
 </html>

@@ -47,6 +47,10 @@
     </head>
 
     <body>
+        <div id="header">
+            <p style="font-family: Courier New;"><% out.print(getServletContext().getInitParameter("name")); %> <% out.print(getServletContext().getInitParameter("section"));%></p>
+        </div>
+
         <h1 class="al">al.</h1>
 
         <div class="container-course">
@@ -122,9 +126,7 @@
 
 
         <div class="container3-course">
-
             <input id="create-course" type="button" value="create course" onclick="toggleModal()">
-
             <main class="table">
                 <section class="table_header">
                     <h1>
@@ -169,7 +171,6 @@
             </main>
         </div>
 
-
         <script>
             function toggleModal() {
                 var modal = document.getElementById('modal');
@@ -177,9 +178,8 @@
             }
         </script>
 
-
         <!-- input record -->
-        <div id="modal" class="modal">
+        <div id="modal" style="display: none;" class="modal">
             <div class="modal-content">
                 <form action="CourseServlet" method="POST">
                     <label for="courseName">Course Name:</label>
@@ -224,12 +224,15 @@
             alert('<%= request.getAttribute("invaliddate")%>');
         </script>
         <% }%>
-        
+
         <% if (request.getAttribute("handledalready") != null) {%>
         <script>
             alert('<%= request.getAttribute("handledalready")%>');
         </script>
         <% }%>
 
-    </body>
+        <div id="footer"
+             <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
+    </div>
+</body>
 </html>
