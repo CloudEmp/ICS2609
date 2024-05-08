@@ -184,17 +184,19 @@ public class ReportsPDF extends HttpServlet {
                 writer.setPageEvent(event);
                 document.open();
 
-                PdfPTable table = new PdfPTable(2);
+                PdfPTable table = new PdfPTable(3);
                 table.setWidthPercentage(100);
                 table.setSpacingBefore(30);
-
+                
+                table.addCell("No.");
                 table.addCell("Username");
                 table.addCell("User Role");
 
                 Statement stmt = conn.createStatement();
                 String query = "SELECT * FROM USER_INFO";
                 ResultSet rs = stmt.executeQuery(query);
-
+                
+                int count = 1;
                 while (rs.next()) {
                     String username2 = rs.getString("USERNAME").trim();
                     String userrole1 = rs.getString("USERROLE").trim();
@@ -202,9 +204,12 @@ public class ReportsPDF extends HttpServlet {
                     if (username2.equals(username1)) {
                         username2 += "*"; // Add asterisk to the username
                     }
-
+                    
+                    table.addCell(Integer.toString(count));
                     table.addCell(username2);
                     table.addCell(userrole1);
+                    
+                    count++;
                 }
 
                 document.add(table);
