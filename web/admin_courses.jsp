@@ -159,14 +159,25 @@
             <img src="images/enrollees.png" class="img-enrollees" onclick="loadEnrolledStudents('<%= course.get(0)%>')">
         </div>
         <%
-                        counter++;
-                    }
+                counter++;
+            }
+        } else {
+        %>
+        <!-- no course yet -->
+        <div class="default-message">
+            <img src="images/qtpochacco.png" alt="default pochacco">
+            <p>No courses have been created.</p>
+        </div>
+        <form action="CourseServlet" method="get">
+            <input id="create" type="submit" name="place" value="Create course">
+        </form>
+
+        <%
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         %>
-
 
         <script>
             function loadEnrolledStudents(course) {

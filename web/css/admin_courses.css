@@ -494,6 +494,43 @@ tbody tr:hover {
     height: 0px;
 }
 
+.default-message {
+    position: fixed;
+    top: 290px;
+    left: 590px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.default-message p {
+    font-size: 18px;
+    margin-bottom: 50px;
+    font-weight: bold;
+    font-style: italic;
+    color: #6B717D;
+}
+.default-message img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+#create {
+    position: fixed;
+    top: 370px;
+    left: 760px;
+    text-align: center;
+    width: 150px;
+    height: 40px;
+    background: #6B717D;
+    color: white;
+    border-radius: 15px;
+}
+
+.find:hover {
+    background-color: #1E293B;
+
+}
+
 #header {
     font-style: italic;
     color: rgba(30, 41, 59, 0.50);

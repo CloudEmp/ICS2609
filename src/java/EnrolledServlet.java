@@ -90,7 +90,7 @@ public class EnrolledServlet extends HttpServlet {
             }
 
             if (selectedCourse != null && !selectedCourse.isEmpty()) {
-                String selectQuery = "SELECT student, instructor, startdate, enddate , durationhours FROM students_info WHERE coursetaken = ?";
+                String selectQuery = "SELECT student, instructor, startdate, enddate , durationhours, enrollment_date FROM students_info WHERE coursetaken = ?";
                 PreparedStatement selectPs = conn.prepareStatement(selectQuery);
                 selectPs.setString(1, selectedCourse);
                 ResultSet resultSet = selectPs.executeQuery();
@@ -98,13 +98,11 @@ public class EnrolledServlet extends HttpServlet {
 
                 while (resultSet.next()) {
                     String studentName = resultSet.getString("student");
-                    String startDate = resultSet.getString("startdate");
-                    String endDate = resultSet.getString("enddate");
+                    String enrollmentDate = resultSet.getString("enrollment_date");
 
                     ArrayList<String> studentDetails = new ArrayList<>();
                     studentDetails.add(studentName);
-                    studentDetails.add(startDate);
-                    studentDetails.add(endDate);
+                    studentDetails.add(enrollmentDate);
 
                     enrolledStudents.add(studentDetails);
                 }

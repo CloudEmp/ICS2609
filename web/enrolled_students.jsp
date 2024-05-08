@@ -24,6 +24,24 @@
 
             th {
                 background-color: #f2f2f2;
+                font-size: 16px;
+            }
+
+            h2 {
+                color: #1E293B;
+            }
+
+            th:nth-child(1), td:nth-child(1) {
+                width: 70%;
+            }
+
+            th:nth-child(2), td:nth-child(2) {
+                width: 30%;
+            }
+
+            .no-students {
+                text-align: center;
+                padding: 30px;
             }
         </style>
     </head>
@@ -33,8 +51,7 @@
             <thead>
                 <tr>
                     <th>Student Name</th>
-                   <!-- <th>Start Date</th> -->
-                   <!-- <th>End Date</th> -->
+                    <th>Enrollment Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,15 +62,14 @@
                 %>
                 <tr>
                     <td><%= student.get(0)%></td>
-                   <!-- <td><%= student.get(1)%></td> -->
-                    <!-- <td><%= student.get(2)%></td>  -->
+                    <td><%= student.get(1)%></td> 
                 </tr>
                 <%
                     }
                 } else {
                 %>
                 <tr>
-                    <td colspan="3">No students enrolled for this course.</td>
+                    <td colspan="3" class="no-students">No students enrolled for this course.</td>
                 </tr>
                 <% }%>
             </tbody>

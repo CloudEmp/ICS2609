@@ -28,10 +28,10 @@
     </head>
 
     <body>
-         <div id="header">
+        <div id="header">
             <p style="font-family: Courier New;"><% out.print(getServletContext().getInitParameter("name")); %> <% out.print(getServletContext().getInitParameter("section"));%></p>
         </div>
-        
+
         <h1 class="al">al.</h1>
 
         <div class="container-course">
@@ -118,14 +118,23 @@
         %>
         <div class="gc-container-<%=counter%>">
             <a href="<%= course.get(5)%>" target="_blank">
-            <img src="<%= course.get(6)%>" class="img-python"></a>
+                <img src="<%= course.get(6)%>" class="img-python"></a>
             <p class="gc-python"><%= course.get(0)%></p>
             <img src="images/clock.png" class="img-clock">
             <p class="duration"><%= course.get(4)%> hours</p>      
         </div>
         <%
-                        counter++;
-                    }
+                counter++;
+            }
+        } else {
+        %>
+        <!-- not enrolled -->
+        <div class="default-message">
+            <img src="images/qtpochacco.png" alt="default pochacco">
+            <p>You haven't enrolled in a course yet</p>
+        </div>
+        <button class="find" onclick="window.open('https://activelearning.ph/courses/', '_blank')">Find course</button>
+        <%
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -134,76 +143,12 @@
 
 
 
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>List of Enrolled Students</h2>
-
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                            <tr>
-                                <td>Toua Tokuchi</td>
-                                <td>2024-04-30</td>
-                            </tr>
-                            <tr>
-                                <td>Kim Sunoo</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Hiroki Dan</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Kim Ji-won</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Shinichi Izumi</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Park Bo-young</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Jeon Wonwoo</td>
-                                <td>2024-04-29</td>
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-
-        <script>
-
-            function openModal() {
-                document.getElementById('myModal').style.display = "block";
-
-            }
-
-            function closeModal() {
-                document.getElementById('myModal').style.display = "none";
-            }
-        </script>
-
-       <%
+        <%
             String enrollmentLimitReached = (String) session.getAttribute("enrollmentLimitReached");
             if (enrollmentLimitReached != null) {
         %>
         <script>
-    alert('<%= enrollmentLimitReached%>');
+            alert('<%= enrollmentLimitReached%>');
         </script>
         <%
                 session.removeAttribute("enrollmentLimitReached");
@@ -212,8 +157,8 @@
 
 
 
-    <div id="footer"
+        <div id="footer"
              <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
     </div>
-    </body>
+</body>
 </html>
