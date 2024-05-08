@@ -68,7 +68,7 @@
             <div class="con-item">
                 <div class="navbar-item">
                     <a href="https://activelearning.ph/courses/" class="navbar-item-text" target="_blank">
-                        <img src="images/book.png" class="img-courses">
+                        <img src="images/courses.png" class="img-courses">
                         Courses
                     </a>
                 </div>
@@ -96,7 +96,7 @@
 
                 <div class="navbar-item">
                     <a href="https://activelearning.ph/contact/" class="navbar-item-text" target="_blank">
-                        <img src="images/contact.png" class="img-contact">
+                        <img src="images/contactus.png" class="img-contact">
                         Contact Us
                     </a>
                 </div>
@@ -156,7 +156,7 @@
                                 <td><form action="CourseServlet" method="post">
                                         <input type="hidden" name="course" value="<%= course.get(0)%>">
                                         <button type="submit" name="option" value="Delete" style="border: none; background: none; padding: 0;">
-                                            <img src="images/delete.png" alt="Delete" style="width: 30px; height: 26px;">
+                                            <img src="images/delete.png" alt="Delete" style="width: 30px; height: 26px; margin-left: 38px;">
                                         </button>                                        </form></td>
                             </tr>
                             <%
@@ -188,7 +188,7 @@
                         <option value="Advanced Python Programming">Advanced Python Programming</option>
                         <option value="Microsoft Excel Advanced">Microsoft Excel Advanced</option>
                         <option value="User Experience(UX)">User Experience(UX)</option>
-                        <option value="CompTIA Security+">CompTIA Security+</option>
+                        <option value="CompTIA Security(plus)">CompTIA Security(plus)</option>
                         <option value="Microsoft Excel Essentials">Microsoft Excel Essentials</option>
                         <option value="ITIL 4 Foundation Certification Program">ITIL 4 Foundation Certification Program</option>
                         <option value="Agile Project Management with Scrum">Agile Project Management with Scrum</option>

@@ -133,7 +133,7 @@
                                 <th> Available Courses </th>
                                 <th> Start Date </th>
                                 <th> End Date </th>
-                                <th> Add Course </th>
+                                <th> Add Course to Enroll </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -165,7 +165,7 @@
                                         <input type="hidden" name="link" value="<%= link%>">
                                         <input type="hidden" name="img" value="<%= img%>">
                                         <button type="submit" name="enrollCourse" value="enrollCourse" style="border: none; background: none; padding: 0;">
-                                            <img src="images/plus.png" alt="add" style="width: 30px; height: 26px;">
+                                            <img src="images/plus.png" alt="add" style="width: 44px; height: 26px; margin-left: 55px;">
                                         </button>                                        
                                     </form>
                                 </td>

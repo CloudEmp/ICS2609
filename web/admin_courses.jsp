@@ -84,7 +84,7 @@
             <div class="con-item">
                 <div class="navbar-item">
                     <a href="https://activelearning.ph/courses/" class="navbar-item-text" target="_blank">
-                        <img src="images/book.png" class="img-courses">
+                        <img src="images/courses.png" class="img-courses">
                         Courses
                     </a>
                 </div>
@@ -112,7 +112,7 @@
 
                 <div class="navbar-item">
                     <a href="https://activelearning.ph/contact/" class="navbar-item-text" target="_blank">
-                        <img src="images/contact.png" class="img-contact">
+                        <img src="images/contactus.png" class="img-contact">
                         Contact Us
                     </a>
                 </div>
