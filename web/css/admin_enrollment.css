@@ -421,6 +421,7 @@ th {
     font-size: 17px;
     font-style: italic;
     border-bottom: solid 3px #1e293b;
+    text-decoration: underline;
 }
 
 td {

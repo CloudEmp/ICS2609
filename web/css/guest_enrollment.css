@@ -1,12 +1,3 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 04 29, 24, 4:16:14 PM
-    Author     : Micah
-*/
-
         * {
             font-family: century gothic;
         }
@@ -253,7 +244,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
           position: fixed;
           width: 1095px;
           height: 30px;
-          top: 21%;
+          top: 20%;
           left: 22.4%;
           z-index: 5;
           display: flex;
@@ -365,26 +356,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         }
 
 
-#header {
-    font-style: italic;
-    color: rgba(30, 41, 59, 0.50);
-    margin-top: 0;
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 70px;
-    right: 0;
-}
+        #header {
+            font-style: italic;
+            color: rgba(30, 41, 59, 0.50);
+            margin-top: 0;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 70px;
+            right: 0;
+        }
 
-#footer {
-    font-style: italic;
-    color: rgba(30, 41, 59, 0.50);
-    margin-top: auto;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 60px;
-    right: 0;
+        #footer {
+            font-style: italic;
+            color: rgba(30, 41, 59, 0.50);
+            margin-top: auto;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 60px;
+            right: 0;
 
-}
+        }
 
