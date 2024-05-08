@@ -30,9 +30,44 @@
         <link href="https://db.onlinewebfonts.com/c/7515664cb5fad83d8ce956ad409ccbb7?family=Helvetica+Rounded+LT+Std+Bold" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel="stylesheet" href="css/admin_courses.css">
+        <style>
+            .modal {
+                display: block;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+            }
+
+            .modal-content {
+                background-color: white;
+                margin: 10% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 600px;
+                position: relative;
+            }
+
+            .close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+        </style>
     </head>
 
     <body>
+        <div id="header">
+            <p style="font-family: Courier New;"><% out.print(getServletContext().getInitParameter("name")); %> <% out.print(getServletContext().getInitParameter("section"));%></p>
+        </div>
         <h1 class="al">al.</h1>
 
         <div class="container-course">
@@ -41,7 +76,6 @@
         </div>
 
         <div class="container1-course">
-
             <img id="image-con" src="images/container1-admin.png" class="box" alt="bg image"/>
             <img id="cover" src="images/cover.png" class="box" alt="cover classroom"/>
             <img id="profile" src="images/profile.png" class="box" alt="profile picture"/>
@@ -103,14 +137,11 @@
             <form action="download_record.jsp" method="get">
                 <input id="download-record" type="submit" value="download record">
             </form>
-
         </div>
 
         <div  class="container4-course">
             <img id="image-bg" src="images/bg-admin.png" class="box" alt="bg image"/>
-
         </div>
-
 
         <%
             try {
@@ -125,7 +156,7 @@
             <p class="gc-python"><%= course.get(0)%></p>
             <img src="images/clock.png" class="img-clock">
             <p class="duration"><%= course.get(3)%> hours</p>
-            <img src="images/enrollees.png" onclick="openModal()" class="img-enrollees">
+            <img src="images/enrollees.png" class="img-enrollees" onclick="loadEnrolledStudents('<%= course.get(0)%>')">
         </div>
         <%
                         counter++;
@@ -136,70 +167,42 @@
             }
         %>
 
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>List of Enrolled Students</h2>
-
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- ganitu na muna since wala pa db ^_^ -->
-                            <tr>
-                                <td>Toua Tokuchi</td>
-                                <td>2024-04-30</td>
-                            </tr>
-                            <tr>
-                                <td>Kim Sunoo</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Hiroki Dan</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Kim Ji-won</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Shinichi Izumi</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Park Bo-young</td>
-                                <td>2024-04-29</td>
-                            </tr>
-                            <tr>
-                                <td>Jeon Wonwoo</td>
-                                <td>2024-04-29</td>
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
 
         <script>
+            function loadEnrolledStudents(course) {
+                fetch("EnrolledServlet?course=" + course)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok");
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            showModal(data);
+                        })
+                        .catch(error => {
+                            console.error("There was a problem with the fetch operation:", error);
+                        });
+            }
 
-            function openModal() {
-                document.getElementById('myModal').style.display = "block";
-
+            function showModal(content) {
+                var modal = document.createElement('div');
+                modal.classList.add('modal');
+                modal.innerHTML = '<div class="modal-content">' + content + '<span class="close" onclick="closeModal()">&times;</span></div>';
+                document.body.appendChild(modal);
             }
 
             function closeModal() {
-                document.getElementById('myModal').style.display = "none";
+                var modals = document.getElementsByClassName('modal');
+                for (var i = 0; i < modals.length; i++) {
+                    modals[i].remove();
+                }
             }
         </script>
 
-
-    </body>
+        <div id="footer"
+             <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
+    </div>
+</body>
 </html>
+
