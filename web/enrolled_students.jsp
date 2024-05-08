@@ -32,11 +32,14 @@
             }
 
             th:nth-child(1), td:nth-child(1) {
-                width: 70%;
+                width: 50%;
             }
 
             th:nth-child(2), td:nth-child(2) {
                 width: 30%;
+            }
+            th:nth-child(3), td:nth-child(3) {
+                width: 20%;
             }
 
             .no-students {
@@ -52,6 +55,7 @@
                 <tr>
                     <th>Student Name</th>
                     <th>Enrollment Date</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,6 +67,16 @@
                 <tr>
                     <td><%= student.get(0)%></td>
                     <td><%= student.get(1)%></td> 
+                    <td>
+                        <form action="EnrolledServlet" method="post">
+                            <input type="hidden" name="studentName" value="<%= student.get(0)%>">
+                            <input type="hidden" name="courseTaken" value="<%= student.get(2)%>">
+                            <input type="hidden" name="action" value="delete">
+                            <button type="submit" name="action" value="delete" style="border: none; background: none; padding: 0;">
+                                <img src="images/delete.png" alt="Delete" style="width: 30px; height: 26px; margin-left: 5px;">
+                            </button> 
+                        </form>
+                    </td>
                 </tr>
                 <%
                     }
@@ -76,3 +90,5 @@
         </table>
     </body>
 </html>
+
+
