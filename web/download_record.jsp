@@ -83,7 +83,7 @@
                 </div>
 
                 <form action="LoginServlet" method="post">
-                    <input id="logout" type="submit" value="Logout" name="logout">
+                    <input id="logout" type="submit" value="logout" name="logout">
                 </form>
 
             </div>
@@ -144,6 +144,17 @@
             <input id="courses2" class="record-button2" type="submit" value="↓" name="reports">
         </form>
 
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="false">
+            <input id="students-1" class="record-button" type="submit" value="All Students" name="reports">
+        </form>
+
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="true">
+            <input id="students-1" class="record-button" type="hidden" value="All Students" name="reports">
+            <input id="students-2" class="record-button2" type="submit" value="↓" name="reports">
+        </form>
+
         <br>
 
         <iframe name="pdfFrame" width="100%" height="600"></iframe>
@@ -161,9 +172,8 @@
         </script>
 
     </div>
-
     <div id="footer"
          <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
-</div>
+    </div>
 </body>
 </html>

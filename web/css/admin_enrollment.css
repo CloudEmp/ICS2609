@@ -558,6 +558,15 @@ tbody tr:hover {
     left: 490px;
 }
 
+#students-1 {
+    top: 352px;
+    left: 300px;
+}
+
+#students-2 {
+    top: 352px;
+    left: 490px;
+}
 
 iframe {
     position: fixed;

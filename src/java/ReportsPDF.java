@@ -161,6 +161,8 @@ public class ReportsPDF extends HttpServlet {
             file = "MYRECORD_";
         } else if (report.equals("Courses")) {
             file = "COURSELIST_";
+        } else if (report.equals("All Students")) {
+            file = "ALLSTUDENTS_";
         }
 
         boolean isDownload = Boolean.parseBoolean(request.getParameter("download"));
@@ -268,6 +270,46 @@ public class ReportsPDF extends HttpServlet {
                     table.addCell(coursestart);
                     table.addCell(courseend);
                     table.addCell(duration);
+                }
+
+                document.add(table);
+                document.close();
+            } else if (report.equals("All Students")) {
+                Document document = new Document(PageSize.LETTER.rotate());
+                PdfWriter writer = PdfWriter.getInstance(document, out);
+                HeaderFooterPageEventStudents event = new HeaderFooterPageEventStudents();
+                writer.setPageEvent(event);
+                document.open();
+
+                PdfPTable table = new PdfPTable(4);
+                table.setWidthPercentage(100);
+                table.setSpacingBefore(30);
+
+                table.addCell("Course");
+                table.addCell("Student");
+                table.addCell("Enrollment Date");
+                table.addCell("Instructor");
+
+                Statement stmt = connection.createStatement();
+                String query = "SELECT * FROM STUDENTS_INFO ORDER BY COURSETAKEN";
+                ResultSet rs = stmt.executeQuery(query);
+
+                while (rs.next()) {
+                    String coursename = rs.getString("COURSETAKEN");
+                    String studentname = rs.getString("STUDENT");
+                    String enrollmentdate = rs.getString("ENROLLMENT_DATE");
+                    String instructorname = rs.getString("instructor");
+                    
+                    if (instructorname != null) {
+                        if (instructorname.equals(fullname)) {
+                            instructorname += "*"; // Add asterisk to the username
+                        }
+                    }
+
+                    table.addCell(coursename);
+                    table.addCell(studentname);
+                    table.addCell(enrollmentdate);
+                    table.addCell(instructorname);
                 }
 
                 document.add(table);
@@ -524,6 +566,81 @@ public class ReportsPDF extends HttpServlet {
         }
 
     }
+    
+    class HeaderFooterPageEventStudents extends PdfPageEventHelper {
+
+        public void onStartPage(PdfWriter writer, Document document) {
+            Font headerFont = new Font(Font.FontFamily.HELVETICA, 15, Font.BOLDITALIC, new BaseColor(0, 0, 0));
+            Font headerFont1 = new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC, new BaseColor(0, 0, 0));
+
+            Rectangle pageSize = document.getPageSize();
+
+            float centerX = pageSize.getWidth() / 2;
+            float topY = pageSize.getHeight() - 30;
+
+            ServletContext servletContext = getServletContext();
+            String name = servletContext.getInitParameter("name");
+            String section = servletContext.getInitParameter("section");
+
+            float dynamicContentY = topY + 18;
+            String dynamicText = name + " " + section;
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(dynamicText, headerFont1), centerX, dynamicContentY, 0);
+
+            String headerText = "Instructor Report (All Students)";
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(headerText, headerFont), centerX, topY, 0);
+        }
+
+        public void onOpenDocument(PdfWriter writer, Document document) {
+            totalPageTemplate = writer.getDirectContent().createTemplate(30, 10);
+        }
+
+        public void onEndPage(PdfWriter writer, Document document) {
+            Font footerFont = new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC, new BaseColor(0, 0, 0));
+            PdfContentByte cb = writer.getDirectContent();
+
+            Phrase usernameFooter = new Phrase(username1, new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC));
+            ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, usernameFooter, document.left() + 36, document.bottom() - 5, 0);
+
+            String timestamp = getTimestamp();
+            ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Paragraph(timestamp, footerFont),
+                    document.getPageSize().getWidth() / 2, document.bottom() - 5, 0);
+
+            int pageNumber = writer.getPageNumber();
+            String pageNumberText = "Page " + pageNumber + " of ";
+            float pageNumberTextSize = new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC).getCalculatedBaseFont(false).getWidthPoint(pageNumberText, 10);
+            float textBase = document.bottom() - 5;
+            cb.beginText();
+            cb.setFontAndSize(new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC).getCalculatedBaseFont(false), 10);
+            cb.setTextMatrix(document.right() - pageNumberTextSize - 36, textBase);
+            cb.showText(pageNumberText);
+            cb.endText();
+            cb.addTemplate(totalPageTemplate, document.right() - 36, textBase);
+
+            ServletContext servletContext = getServletContext();
+            String date = servletContext.getAttribute("date").toString();
+            String subject = servletContext.getInitParameter("subject");
+            String mp = servletContext.getInitParameter("mp");
+            String dynamicContent = date + " " + subject + " " + mp;
+            ColumnText.showTextAligned(cb, Element.ALIGN_CENTER, new Phrase(dynamicContent, footerFont),
+                    (document.right() + document.left()) / 2, document.bottom() - 30, 0);
+        }
+
+        private String getTimestamp() {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return dateFormat.format(new Date());
+        }
+
+        public void onCloseDocument(PdfWriter writer, Document document) {
+
+            totalPageTemplate.beginText();
+            totalPageTemplate.setFontAndSize(new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC).getCalculatedBaseFont(false), 10);
+            totalPageTemplate.setTextMatrix(0, 0);
+            totalPageTemplate.showText(String.valueOf(writer.getPageNumber()));
+            totalPageTemplate.endText();
+        }
+    }
 }
+
+
 
 
