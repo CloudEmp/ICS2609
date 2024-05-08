@@ -13,7 +13,7 @@
     </context-param>
     <context-param>
         <param-name>name</param-name>
-        <param-value>Group 2</param-value>
+        <param-value>Group 6</param-value>
     </context-param>
     <context-param>
         <param-name>mp</param-name>
