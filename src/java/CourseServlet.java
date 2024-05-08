@@ -134,6 +134,9 @@ public class CourseServlet extends HttpServlet {
             } else if (selectedPlace.equals("MyCourses")) {
                 dispatcher = request.getRequestDispatcher("admin_courses.jsp");
                 dispatcher.forward(request, response);
+            }  else if (selectedPlace.equals("Create course")) {
+                dispatcher = request.getRequestDispatcher("admin_enrollment.jsp");
+                dispatcher.forward(request, response);
             }
 
             conn.close();
