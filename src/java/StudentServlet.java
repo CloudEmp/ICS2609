@@ -10,7 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -220,6 +222,8 @@ public class StudentServlet extends HttpServlet {
         String durationhours = request.getParameter("durationhours");
         String studentlink = request.getParameter("link");
         String studentimg = request.getParameter("img");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date());
 
         try {
             if (conn.isClosed()) {
@@ -248,8 +252,8 @@ public class StudentServlet extends HttpServlet {
                     countPs.close();
 
                     //=========================================================================//
-                    if (numberOfCoursesTaken < 3) {
-                        String insertQuery = "INSERT INTO students_info (student, coursetaken, instructor, startdate, enddate, durationhours, link, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                   if (numberOfCoursesTaken < 3) {
+                        String insertQuery = "INSERT INTO students_info (student, coursetaken, instructor, startdate, enddate, durationhours, link, img, enrollment_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                         PreparedStatement insertPs = conn.prepareStatement(insertQuery);
                         insertPs.setString(1, fullname);
                         insertPs.setString(2, takenCourse);
@@ -259,9 +263,10 @@ public class StudentServlet extends HttpServlet {
                         insertPs.setString(6, durationhours);
                         insertPs.setString(7, studentlink);
                         insertPs.setString(8, studentimg);
+                        insertPs.setString(9, currentDate);
                         int rowsAffected = insertPs.executeUpdate();
                     } else {
-                        request.setAttribute("enrollmentLimitReached", "You have reached the enrollment limit (3 courses).");
+                         session.setAttribute("enrollmentLimitReached", "You have reached the enrollment limit (3 courses).");
                     }
                 }
                 checkTakenResult.close();
@@ -330,9 +335,7 @@ public class StudentServlet extends HttpServlet {
             request.setAttribute("studentCourses", students);
 
             RequestDispatcher dispatcher;
-            dispatcher = request.getRequestDispatcher("guest_courses.jsp");
-            dispatcher.forward(request, response);
-
+             response.sendRedirect("StudentServlet");
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(StudentServlet.class.getName()).log(Level.SEVERE, null, ex);
