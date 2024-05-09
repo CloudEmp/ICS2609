@@ -116,13 +116,12 @@
                         Contact Us
                     </a>
                 </div>
-
-                <form action="LoginServlet" method="post">
-                    <input id="logout" type="submit" value="Logout" name="logout">
-                </form>
-
             </div>
         </div>
+
+        <form action="LoginServlet" method="post">
+            <input id="logout" type="submit" value="Logout" name="logout">
+        </form>
 
 
         <div class="container2-course">
@@ -168,7 +167,7 @@
             <img src="images/qtpochacco.png" alt="default pochacco">
             <p>No courses have been created.</p>
         </div>
-        <form action="CourseServlet" method="get">
+        <form action="CourseServlet" method="get" >
             <input id="create" type="submit" name="place" value="Create course">
         </form>
 
