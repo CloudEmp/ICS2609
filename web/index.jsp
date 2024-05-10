@@ -22,18 +22,7 @@
         <title>Login</title>
         <link href="https://db.onlinewebfonts.com/c/7515664cb5fad83d8ce956ad409ccbb7?family=Helvetica+Rounded+LT+Std+Bold" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-        <link rel="stylesheet" href="css/styles.css">
-        <style>
-            body {
-                background-image: url('images/bg.png');
-                background-size: 1600px 800px;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                position: fixed;
-            }
-        </style>
+        <link rel="stylesheet" href="css/styles.css?v=76">
 
     </head>
 
