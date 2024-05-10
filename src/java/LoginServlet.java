@@ -135,7 +135,9 @@ public class LoginServlet extends HttpServlet {
                     if (username.isEmpty() && password.isEmpty()) {
                         throw new NullPointerException();
                     } else {
-                        password = encrypt(password);
+                        if (!password.isEmpty()) {
+                            password = encrypt(password);
+                        }
                         if (!(usernameExists(conn, username)) && password.isEmpty()) {
                             response.sendRedirect("error_1.jsp");
                         } else if (!usernameExists(conn, username) && !passwordExists(conn, password)) {
@@ -181,7 +183,7 @@ public class LoginServlet extends HttpServlet {
                     }
                 } catch (NullPointerException npe) {
 
-                    response.sendRedirect("noLoginCredentials.jsp");
+                    response.sendRedirect("error_4.jsp");
                 }
             }
         } catch (SQLException sqle) {
