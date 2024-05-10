@@ -10,7 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -93,7 +95,6 @@ public class CourseServlet extends HttpServlet {
             PreparedStatement selectPs = conn.prepareStatement(selectQuery);
             selectPs.setString(1, fullname);
             ResultSet resultSet = selectPs.executeQuery();
-            
 
             ArrayList<ArrayList<String>> courses = new ArrayList<>();
 
@@ -112,9 +113,9 @@ public class CourseServlet extends HttpServlet {
                 courseDetails.add(duration);
                 courseDetails.add(link);
                 courseDetails.add(img);
-                
+
                 courses.add(courseDetails);
-               
+
             }
 
             session.setAttribute("coursessession", courses);
@@ -132,7 +133,7 @@ public class CourseServlet extends HttpServlet {
             } else if (selectedPlace.equals("MyCourses")) {
                 dispatcher = request.getRequestDispatcher("admin_courses.jsp");
                 dispatcher.forward(request, response);
-            }  else if (selectedPlace.equals("Create course")) {
+            } else if (selectedPlace.equals("Create course")) {
                 dispatcher = request.getRequestDispatcher("admin_enrollment.jsp");
                 dispatcher.forward(request, response);
             }
@@ -166,46 +167,56 @@ public class CourseServlet extends HttpServlet {
             if (conn.isClosed()) {
                 init(getServletConfig());
             }
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String currentDate = dateFormat.format(new Date());
+
             if (selectedAction.equals("Add")) {
                 if (endDate.compareTo(startDate) >= 0) {
-                    String countQuery = "SELECT COUNT(*) FROM courses_info WHERE instructor = ?";
-                    PreparedStatement countPs = conn.prepareStatement(countQuery);
-                    countPs.setString(1, fullname);
-                    ResultSet countResult = countPs.executeQuery();
-                    int numberOfCourses = 0;
-                    if (countResult.next()) {
-                        numberOfCourses = countResult.getInt(1);
-                    }
-                    countResult.close();
-                    countPs.close();
+                    if (!(currentDate.compareTo(startDate) >= 0)) {
 
-                    if (numberOfCourses < 3) {
-                        String updateQuery = "UPDATE courses_info SET instructor = ?, startdate = ?, enddate = ? WHERE course = ? AND instructor IS NULL";
-                        PreparedStatement ps = conn.prepareStatement(updateQuery);
-                        ps.setString(1, fullname);
-                        ps.setString(2, startDate);
-                        ps.setString(3, endDate);
-                        ps.setString(4, selectedCourse);
-                        int rowsUpdated = ps.executeUpdate();
-                        ps.close();
-                        if (rowsUpdated == 0) {
-                            String instructorQuery = "SELECT instructor FROM courses_info WHERE course = ?";
-                            PreparedStatement instructorPS = conn.prepareStatement(instructorQuery);
-                            instructorPS.setString(1, selectedCourse);
-                            ResultSet rs = instructorPS.executeQuery();
-                            if (rs.next()) {
-                                String instructorName = rs.getString("instructor");
-                                if (instructorName.equals(fullname)) {
-                                    request.setAttribute("handledalready", "You already handle the course.");
-                                } else {
-                                    request.setAttribute("handledalready", "Course is already handled by another instructor.");
+                        String countQuery = "SELECT COUNT(*) FROM courses_info WHERE instructor = ?";
+                        PreparedStatement countPs = conn.prepareStatement(countQuery);
+                        countPs.setString(1, fullname);
+                        ResultSet countResult = countPs.executeQuery();
+                        int numberOfCourses = 0;
+                        if (countResult.next()) {
+                            numberOfCourses = countResult.getInt(1);
+                        }
+                        countResult.close();
+                        countPs.close();
+
+                        if (numberOfCourses < 3) {
+                            String updateQuery = "UPDATE courses_info SET instructor = ?, startdate = ?, enddate = ? WHERE course = ? AND instructor IS NULL";
+                            PreparedStatement ps = conn.prepareStatement(updateQuery);
+                            ps.setString(1, fullname);
+                            ps.setString(2, startDate);
+                            ps.setString(3, endDate);
+                            ps.setString(4, selectedCourse);
+                            int rowsUpdated = ps.executeUpdate();
+                            ps.close();
+                            if (rowsUpdated == 0) {
+                                String instructorQuery = "SELECT instructor FROM courses_info WHERE course = ?";
+                                PreparedStatement instructorPS = conn.prepareStatement(instructorQuery);
+                                instructorPS.setString(1, selectedCourse);
+                                ResultSet rs = instructorPS.executeQuery();
+                                if (rs.next()) {
+                                    String instructorName = rs.getString("instructor");
+                                    if (instructorName.equals(fullname)) {
+                                        request.setAttribute("handledalready", "You already handle the course.");
+                                    } else {
+                                        request.setAttribute("handledalready", "Course is already handled by another instructor.");
+                                    }
                                 }
+                                rs.close();
+                                instructorPS.close();
                             }
-                            rs.close();
-                            instructorPS.close();
+
+                        } else {
+                            request.setAttribute("limitreached", "Limit of 3 courses per instructor.");
                         }
                     } else {
-                        request.setAttribute("limitreached", "Limit of 3 courses per instructor.");
+                        request.setAttribute("invaliddate", "The start date must be at least the current date.");
                     }
                 } else {
                     request.setAttribute("invaliddate", "End date should not be earlier than start date.");
@@ -218,6 +229,7 @@ public class CourseServlet extends HttpServlet {
                 int rowsUpdated = ps.executeUpdate();
                 updateQuery = "DELETE FROM students_info WHERE coursetaken = ?";
                 ps = conn.prepareStatement(updateQuery);
+
                 ps.setString(1, selectedCourse);
                 rowsUpdated = ps.executeUpdate();
                 ps.close();

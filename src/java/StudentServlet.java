@@ -162,7 +162,7 @@ public class StudentServlet extends HttpServlet {
 
             courseDescriptions.put("User Experience(UX)", "This boot-camp is fast-paced, hands-on and interactive. It has been designed to focus on “learning by doing” rather than “learning by listening”.");
 
-            courseDescriptions.put("CompTIA Security(plus)", "CompTIA Security+ provides a global benchmark for best practices in IT network and operational security, one of the fastest-growing fields in IT.");
+            courseDescriptions.put("CompTIA Security", "CompTIA Security provides a global benchmark for best practices in IT network and operational security, one of the fastest-growing fields in IT.");
 
             courseDescriptions.put("Microsoft Excel Essentials", "Microsoft Excel is the industry leading tool to help workers work with data on the desktop. This Microsoft Excel training course enables you to become more productive by allowing you to automate data processing essential to your daily work.");
 

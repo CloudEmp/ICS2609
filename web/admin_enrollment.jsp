@@ -188,7 +188,7 @@
                         <option value="Advanced Python Programming">Advanced Python Programming</option>
                         <option value="Microsoft Excel Advanced">Microsoft Excel Advanced</option>
                         <option value="User Experience(UX)">User Experience(UX)</option>
-                        <option value="CompTIA Security(plus)">CompTIA Security(plus)</option>
+                        <option value="CompTIA Security">CompTIA Security</option>
                         <option value="Microsoft Excel Essentials">Microsoft Excel Essentials</option>
                         <option value="ITIL 4 Foundation Certification Program">ITIL 4 Foundation Certification Program</option>
                         <option value="Agile Project Management with Scrum">Agile Project Management with Scrum</option>
