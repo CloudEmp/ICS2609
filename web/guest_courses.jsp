@@ -121,6 +121,7 @@
                 <img src="<%= course.get(6)%>" class="img-python"></a>
             <p class="gc-python"><%= course.get(0)%></p>
             <img src="images/clock.png" class="img-clock">
+            <p class="instructorz"> Instructor: <%= course.get(1)%></p>
             <p class="duration"><%= course.get(4)%> hours</p>      
         </div>
         <%
