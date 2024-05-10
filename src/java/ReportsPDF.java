@@ -18,6 +18,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -167,158 +169,326 @@ public class ReportsPDF extends HttpServlet {
 
         boolean isDownload = Boolean.parseBoolean(request.getParameter("download"));
 
-        if (isDownload) {
-            response.setContentType("application/pdf");
-            String filename = file + getTimestamp() + ".pdf";
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-        }
-        
-        response.setContentType("application/pdf");
-        ServletOutputStream out = response.getOutputStream();
-
         try {
             if (report.equals("All Records")) {
-                Document document = new Document(PageSize.LETTER.rotate());
-                PdfWriter writer = PdfWriter.getInstance(document, out);
-                HeaderFooterPageEventInstructor event = new HeaderFooterPageEventInstructor();
-                writer.setPageEvent(event);
-                document.open();
+                if (isDownload) {
+                    String folderPath = getServletContext().getRealPath("/PDF Report History/") + File.separator;
+                    String filename = file + getTimestamp() + ".pdf";
 
-                PdfPTable table = new PdfPTable(3);
-                table.setWidthPercentage(100);
-                table.setSpacingBefore(30);
-                
-                table.addCell("No.");
-                table.addCell("Username");
-                table.addCell("User Role");
+                    Document document = new Document(PageSize.LETTER.rotate());
 
-                Statement stmt = conn.createStatement();
-                String query = "SELECT * FROM USER_INFO";
-                ResultSet rs = stmt.executeQuery(query);
-                
-                int count = 1;
-                while (rs.next()) {
-                    String username2 = rs.getString("USERNAME").trim();
-                    String userrole1 = rs.getString("USERROLE").trim();
+                    PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(folderPath + filename));
 
-                    if (username2.equals(username1)) {
-                        username2 += "*"; // Add asterisk to the username
+                    HeaderFooterPageEventInstructor event = new HeaderFooterPageEventInstructor();
+                    writer.setPageEvent(event);
+
+                    document.open();
+
+                    PdfPTable table = new PdfPTable(3);
+                    table.setWidthPercentage(100);
+                    table.setSpacingBefore(30);
+
+                    table.addCell("No.");
+                    table.addCell("Username");
+                    table.addCell("User Role");
+
+                    Statement stmt = conn.createStatement();
+                    String query = "SELECT * FROM USER_INFO";
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    int count = 1;
+                    while (rs.next()) {
+                        String username2 = rs.getString("USERNAME").trim();
+                        String userrole1 = rs.getString("USERROLE").trim();
+
+                        if (username2.equals(username1)) {
+                            username2 += "*"; // Add asterisk to the username
+                        }
+
+                        table.addCell(Integer.toString(count));
+                        table.addCell(username2);
+                        table.addCell(userrole1);
+
+                        count++;
                     }
-                    
-                    table.addCell(Integer.toString(count));
-                    table.addCell(username2);
-                    table.addCell(userrole1);
-                    
-                    count++;
+
+                    document.add(table);
+
+                    document.close();
+                } else {
+                    response.setContentType("application/pdf");
+                    ServletOutputStream out = response.getOutputStream();
+                    Document document = new Document(PageSize.LETTER.rotate());
+                    PdfWriter writer = PdfWriter.getInstance(document, out);
+                    HeaderFooterPageEventInstructor event = new HeaderFooterPageEventInstructor();
+                    writer.setPageEvent(event);
+                    document.open();
+
+                    PdfPTable table = new PdfPTable(3);
+                    table.setWidthPercentage(100);
+                    table.setSpacingBefore(30);
+
+                    table.addCell("No.");
+                    table.addCell("Username");
+                    table.addCell("User Role");
+
+                    Statement stmt = conn.createStatement();
+                    String query = "SELECT * FROM USER_INFO";
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    int count = 1;
+                    while (rs.next()) {
+                        String username2 = rs.getString("USERNAME").trim();
+                        String userrole1 = rs.getString("USERROLE").trim();
+
+                        if (username2.equals(username1)) {
+                            username2 += "*"; // Add asterisk to the username
+                        }
+
+                        table.addCell(Integer.toString(count));
+                        table.addCell(username2);
+                        table.addCell(userrole1);
+
+                        count++;
+                    }
+
+                    document.add(table);
+
+                    document.close();
                 }
-
-                document.add(table);
-
-                document.close();
             } else if (report.equals("My Record")) {
-                Document document = new Document(new com.itextpdf.text.Rectangle(200, 400).rotate());
-                PdfWriter writer = PdfWriter.getInstance(document, out);
-                HeaderFooterPageEventStudent event = new HeaderFooterPageEventStudent();
-                writer.setPageEvent(event);
-                document.open();
-                document.add(new Paragraph(""));
-                document.add(Chunk.NEWLINE);
-                document.add(new Paragraph(""));
-                document.add(Chunk.NEWLINE);
+                if (isDownload) {
+                    String folderPath = getServletContext().getRealPath("/PDF Report History/") + File.separator;
+                    String filename = file + getTimestamp() + ".pdf";
 
-                Paragraph usernameParagraph = new Paragraph("Username: " + username1);
-                usernameParagraph.setAlignment(Element.ALIGN_CENTER);
-                document.add(usernameParagraph);
+                    Document document = new Document(new com.itextpdf.text.Rectangle(200, 400).rotate());
 
-                Paragraph passwordParagraph = new Paragraph("Password: " + password);
-                passwordParagraph.setAlignment(Element.ALIGN_CENTER);
-                document.add(passwordParagraph);
+                    PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(folderPath + filename));
 
-                document.close();
+                    HeaderFooterPageEventStudent event = new HeaderFooterPageEventStudent();
+                    writer.setPageEvent(event);
+                    document.open();
+                    document.add(new Paragraph(""));
+                    document.add(Chunk.NEWLINE);
+                    document.add(new Paragraph(""));
+                    document.add(Chunk.NEWLINE);
 
+                    Paragraph usernameParagraph = new Paragraph("Username: " + username1);
+                    usernameParagraph.setAlignment(Element.ALIGN_CENTER);
+                    document.add(usernameParagraph);
+
+                    Paragraph passwordParagraph = new Paragraph("Password: " + password);
+                    passwordParagraph.setAlignment(Element.ALIGN_CENTER);
+                    document.add(passwordParagraph);
+
+                    document.close();
+                } else {
+                    response.setContentType("application/pdf");
+                    ServletOutputStream out = response.getOutputStream();
+                    Document document = new Document(new com.itextpdf.text.Rectangle(200, 400).rotate());
+                    PdfWriter writer = PdfWriter.getInstance(document, out);
+                    HeaderFooterPageEventStudent event = new HeaderFooterPageEventStudent();
+                    writer.setPageEvent(event);
+                    document.open();
+                    document.add(new Paragraph(""));
+                    document.add(Chunk.NEWLINE);
+                    document.add(new Paragraph(""));
+                    document.add(Chunk.NEWLINE);
+
+                    Paragraph usernameParagraph = new Paragraph("Username: " + username1);
+                    usernameParagraph.setAlignment(Element.ALIGN_CENTER);
+                    document.add(usernameParagraph);
+
+                    Paragraph passwordParagraph = new Paragraph("Password: " + password);
+                    passwordParagraph.setAlignment(Element.ALIGN_CENTER);
+                    document.add(passwordParagraph);
+
+                    document.close();
+                }
             } else if (report.equals("Courses")) {
-                Document document = new Document(new com.itextpdf.text.Rectangle(400, 600).rotate());
-                PdfWriter writer = PdfWriter.getInstance(document, out);
-                HeaderFooterPageEventCourses event = new HeaderFooterPageEventCourses();
-                writer.setPageEvent(event);
-                document.open();
+                if (isDownload) {
+                    String folderPath = getServletContext().getRealPath("/PDF Report History/") + File.separator;
+                    String filename = file + getTimestamp() + ".pdf";
 
-                PdfPTable table = new PdfPTable(5);
-                table.setWidthPercentage(100);
-                table.setSpacingBefore(10);
+                    Document document = new Document(new com.itextpdf.text.Rectangle(400, 600).rotate());
 
-                table.addCell("Course");
-                table.addCell("Instructor");
-                table.addCell("Start Date");
-                table.addCell("End Date");
-                table.addCell("Duration (Hours)");
+                    PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(folderPath + filename));
 
-                Statement stmt = connection.createStatement();
-                String query = "SELECT * FROM COURSES_INFO";
-                ResultSet rs = stmt.executeQuery(query);
+                    HeaderFooterPageEventCourses event = new HeaderFooterPageEventCourses();
+                    writer.setPageEvent(event);
+                    document.open();
 
-                while (rs.next()) {
-                    String coursename = rs.getString("COURSE");
-                    String instructorname = rs.getString("INSTRUCTOR");
-                    String coursestart = rs.getString("STARTDATE");
-                    String courseend = rs.getString("ENDDATE");
-                    String duration = rs.getString("DURATIONHOURS");
+                    PdfPTable table = new PdfPTable(5);
+                    table.setWidthPercentage(100);
+                    table.setSpacingBefore(10);
 
-                    if (instructorname != null) {
-                        if (instructorname.equals(fullname)) {
-                            instructorname += "*"; // Add asterisk to the username
+                    table.addCell("Course");
+                    table.addCell("Instructor");
+                    table.addCell("Start Date");
+                    table.addCell("End Date");
+                    table.addCell("Duration (Hours)");
+
+                    Statement stmt = connection.createStatement();
+                    String query = "SELECT * FROM COURSES_INFO";
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    while (rs.next()) {
+                        String coursename = rs.getString("COURSE");
+                        String instructorname = rs.getString("INSTRUCTOR");
+                        String coursestart = rs.getString("STARTDATE");
+                        String courseend = rs.getString("ENDDATE");
+                        String duration = rs.getString("DURATIONHOURS");
+
+                        if (instructorname != null) {
+                            if (instructorname.equals(fullname)) {
+                                instructorname += "*"; // Add asterisk to the username
+                            }
                         }
+
+                        table.addCell(coursename);
+                        table.addCell(instructorname);
+                        table.addCell(coursestart);
+                        table.addCell(courseend);
+                        table.addCell(duration);
                     }
 
-                    table.addCell(coursename);
-                    table.addCell(instructorname);
-                    table.addCell(coursestart);
-                    table.addCell(courseend);
-                    table.addCell(duration);
-                }
+                    document.add(table);
+                    document.close();
+                } else {
+                    response.setContentType("application/pdf");
+                    ServletOutputStream out = response.getOutputStream();
+                    Document document = new Document(new com.itextpdf.text.Rectangle(400, 600).rotate());
+                    PdfWriter writer = PdfWriter.getInstance(document, out);
+                    HeaderFooterPageEventCourses event = new HeaderFooterPageEventCourses();
+                    writer.setPageEvent(event);
+                    document.open();
 
-                document.add(table);
-                document.close();
+                    PdfPTable table = new PdfPTable(5);
+                    table.setWidthPercentage(100);
+                    table.setSpacingBefore(10);
+
+                    table.addCell("Course");
+                    table.addCell("Instructor");
+                    table.addCell("Start Date");
+                    table.addCell("End Date");
+                    table.addCell("Duration (Hours)");
+
+                    Statement stmt = connection.createStatement();
+                    String query = "SELECT * FROM COURSES_INFO";
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    while (rs.next()) {
+                        String coursename = rs.getString("COURSE");
+                        String instructorname = rs.getString("INSTRUCTOR");
+                        String coursestart = rs.getString("STARTDATE");
+                        String courseend = rs.getString("ENDDATE");
+                        String duration = rs.getString("DURATIONHOURS");
+
+                        if (instructorname != null) {
+                            if (instructorname.equals(fullname)) {
+                                instructorname += "*"; // Add asterisk to the username
+                            }
+                        }
+
+                        table.addCell(coursename);
+                        table.addCell(instructorname);
+                        table.addCell(coursestart);
+                        table.addCell(courseend);
+                        table.addCell(duration);
+                    }
+
+                    document.add(table);
+                    document.close();
+                }
             } else if (report.equals("All Students")) {
-                Document document = new Document(PageSize.LETTER.rotate());
-                PdfWriter writer = PdfWriter.getInstance(document, out);
-                HeaderFooterPageEventStudents event = new HeaderFooterPageEventStudents();
-                writer.setPageEvent(event);
-                document.open();
+                if (isDownload) {
+                    String folderPath = getServletContext().getRealPath("/PDF Report History/") + File.separator;
+                    String filename = file + getTimestamp() + ".pdf";
 
-                PdfPTable table = new PdfPTable(4);
-                table.setWidthPercentage(100);
-                table.setSpacingBefore(30);
+                    Document document = new Document(PageSize.LETTER.rotate());
 
-                table.addCell("Course");
-                table.addCell("Student");
-                table.addCell("Enrollment Date");
-                table.addCell("Instructor");
+                    PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(folderPath + filename));
 
-                Statement stmt = connection.createStatement();
-                String query = "SELECT * FROM STUDENTS_INFO ORDER BY COURSETAKEN";
-                ResultSet rs = stmt.executeQuery(query);
+                    HeaderFooterPageEventStudents event = new HeaderFooterPageEventStudents();
+                    writer.setPageEvent(event);
+                    document.open();
 
-                while (rs.next()) {
-                    String coursename = rs.getString("COURSETAKEN");
-                    String studentname = rs.getString("STUDENT");
-                    String enrollmentdate = rs.getString("ENROLLMENT_DATE");
-                    String instructorname = rs.getString("instructor");
-                    
-                    if (instructorname != null) {
-                        if (instructorname.equals(fullname)) {
-                            instructorname += "*"; // Add asterisk to the username
+                    PdfPTable table = new PdfPTable(4);
+                    table.setWidthPercentage(100);
+                    table.setSpacingBefore(30);
+
+                    table.addCell("Course");
+                    table.addCell("Student");
+                    table.addCell("Enrollment Date");
+                    table.addCell("Instructor");
+
+                    Statement stmt = connection.createStatement();
+                    String query = "SELECT * FROM STUDENTS_INFO ORDER BY COURSETAKEN";
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    while (rs.next()) {
+                        String coursename = rs.getString("COURSETAKEN");
+                        String studentname = rs.getString("STUDENT");
+                        String enrollmentdate = rs.getString("ENROLLMENT_DATE");
+                        String instructorname = rs.getString("instructor");
+
+                        if (instructorname != null) {
+                            if (instructorname.equals(fullname)) {
+                                instructorname += "*"; // Add asterisk to the username
+                            }
                         }
+
+                        table.addCell(coursename);
+                        table.addCell(studentname);
+                        table.addCell(enrollmentdate);
+                        table.addCell(instructorname);
                     }
 
-                    table.addCell(coursename);
-                    table.addCell(studentname);
-                    table.addCell(enrollmentdate);
-                    table.addCell(instructorname);
-                }
+                    document.add(table);
+                    document.close();
+                } else {
+                    response.setContentType("application/pdf");
+                    ServletOutputStream out = response.getOutputStream();
+                    Document document = new Document(PageSize.LETTER.rotate());
+                    PdfWriter writer = PdfWriter.getInstance(document, out);
+                    HeaderFooterPageEventStudents event = new HeaderFooterPageEventStudents();
+                    writer.setPageEvent(event);
+                    document.open();
 
-                document.add(table);
-                document.close();
+                    PdfPTable table = new PdfPTable(4);
+                    table.setWidthPercentage(100);
+                    table.setSpacingBefore(30);
+
+                    table.addCell("Course");
+                    table.addCell("Student");
+                    table.addCell("Enrollment Date");
+                    table.addCell("Instructor");
+
+                    Statement stmt = connection.createStatement();
+                    String query = "SELECT * FROM STUDENTS_INFO ORDER BY COURSETAKEN";
+                    ResultSet rs = stmt.executeQuery(query);
+
+                    while (rs.next()) {
+                        String coursename = rs.getString("COURSETAKEN");
+                        String studentname = rs.getString("STUDENT");
+                        String enrollmentdate = rs.getString("ENROLLMENT_DATE");
+                        String instructorname = rs.getString("instructor");
+
+                        if (instructorname != null) {
+                            if (instructorname.equals(fullname)) {
+                                instructorname += "*"; // Add asterisk to the username
+                            }
+                        }
+
+                        table.addCell(coursename);
+                        table.addCell(studentname);
+                        table.addCell(enrollmentdate);
+                        table.addCell(instructorname);
+                    }
+
+                    document.add(table);
+                    document.close();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -571,7 +741,7 @@ public class ReportsPDF extends HttpServlet {
         }
 
     }
-    
+
     class HeaderFooterPageEventStudents extends PdfPageEventHelper {
 
         public void onStartPage(PdfWriter writer, Document document) {
@@ -645,7 +815,3 @@ public class ReportsPDF extends HttpServlet {
         }
     }
 }
-
-
-
-
