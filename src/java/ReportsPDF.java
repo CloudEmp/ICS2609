@@ -172,7 +172,7 @@ public class ReportsPDF extends HttpServlet {
         try {
             if (report.equals("All Records")) {
                 if (isDownload) {
-                    String folderPath = getServletContext().getRealPath("/PDF Report History/") + File.separator;
+                    String folderPath = getServletContext().getRealPath("../PDF Report History/") + File.separator;
                     String filename = file + getTimestamp() + ".pdf";
 
                     Document document = new Document(PageSize.LETTER.rotate());

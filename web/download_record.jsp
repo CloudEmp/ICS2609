@@ -25,7 +25,7 @@
 
         <link href="https://db.onlinewebfonts.com/c/7515664cb5fad83d8ce956ad409ccbb7?family=Helvetica+Rounded+LT+Std+Bold" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-        <link rel="stylesheet" href="css/admin_enrollment.css">
+        <link rel="stylesheet" href="css/admin_enrollment.css?v=24">
     </head>
 
     <body>

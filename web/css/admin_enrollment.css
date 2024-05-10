@@ -612,7 +612,7 @@ iframe {
     cursor: pointer;
 }
 
-#courses-dl:hover, #enroll-dl:hover {
+#courses-dl:hover, #enroll-dl:hover, .record-button2:hover, #my-record2:hover{
     background-color: #9F79C7;
 }
 
