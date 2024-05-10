@@ -240,6 +240,7 @@
         .img-python,
         .img-clock,
         .gc-python,
+        .instructorz,
         .duration,
         .img-enrollees {
             transition: transform 0.3s ease-in-out;
@@ -282,7 +283,7 @@
             position: fixed;
             width: 32px;
             height: 29px;
-            margin: 245px 0 0 -135px;
+            margin: 250px 0 0 -135px;
         }
 
 
@@ -290,7 +291,7 @@
             position: fixed;
             width: 429px;
             height: 72px;
-            margin: 250px 0 0 30px;
+            margin: 255px 0 0 30px;
             font-family: "Century Gothic";
             font-size: 16px;
             font-weight: bold;
@@ -506,6 +507,24 @@
         .find:hover {
             background-color: #1E293B;
 
+        }
+        
+          .instructorz {
+            position: fixed;
+            width: 429px;
+            height: 72px;
+            margin: 227px 0 0 3px;
+            font-family: "Century Gothic";
+            font-size: 16px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: rgba(30, 41, 59, 0.51);
+            font-style: italic;
+            text-decoration: underline;
         }
 
         #header {
