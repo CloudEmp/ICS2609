@@ -25,7 +25,25 @@
 
         <link href="https://db.onlinewebfonts.com/c/7515664cb5fad83d8ce956ad409ccbb7?family=Helvetica+Rounded+LT+Std+Bold" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-        <link rel="stylesheet" href="css/admin_enrollment.css?v=24">
+        <link rel="stylesheet" href="css/admin_enrollment.css?v=23">'
+
+        <style>
+
+            .modal-content {
+                background-image: url(images/classroom.png);
+                background-size: cover;
+                border-radius: 15px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                width: 400px;
+                padding: 30px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+        </style>
+
     </head>
 
     <body>
@@ -154,6 +172,67 @@
             <input id="students-1" class="record-button" type="hidden" value="All Students" name="reports">
             <input id="students-2" class="record-button2" type="submit" value="↓" name="reports">
         </form>
+       
+
+
+
+        <!--   <form action="ReportsPDF" method="post" target="pdfFrame">
+              <input type="hidden" name="download" value="false">
+              <input id="date" class="record-button" type="submit" value="Choose a date" name="reports">
+          </form> -->
+
+
+        <!--
+        <form action="ReportsPDF" method="post" target="pdfFrame">
+            <input type="hidden" name="download" value="true">
+            <input id="date" class="record-button" type="hidden" value="Choose a date" name="reports">
+            <input id="date2" class="record-button2" type="submit" value="↓" name="reports">
+        </form>
+        -->
+
+
+        <input id="date" class="record-button" type="submit" value="Choose a date" onclick="toggleModal()">
+
+
+
+        <div id="modal" style="display: none;" class="modal">
+            <div class="modal-content">
+                <form action="ReportsPDF" method="POST" target="pdfFrame">
+
+                    <br><br>
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" name="startdate" required>
+                    <br><br>
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" name="enddate" required>
+                    <br><br>
+                    <input type="hidden" name="download" value="true">
+                    <input type="submit" name="reports" value="Download PDF">
+
+                </form>
+
+                <span class="close" onclick="toggleModal()">&times;</span>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            function toggleModal() {
+                var modal = document.getElementById('modal');
+                modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+            }
+        </script>
+
+
 
         <br>
 
@@ -175,5 +254,13 @@
     <div id="footer"
          <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
     </div>
+    
+
+        <% if (request.getAttribute("invaliddate") != null) {%>
+        <script>
+            alert('<%= request.getAttribute("invaliddate")%>');
+        </script>
+        <% }%>
+
 </body>
 </html>

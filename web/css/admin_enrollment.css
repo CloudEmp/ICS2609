@@ -564,6 +564,20 @@ tbody tr:hover {
     left: 300px;
 }
 
+
+
+#date {
+    top: 428px;
+    left: 300px;
+}
+
+
+#date2 {
+    top: 428px;
+    left: 490px;
+}
+
+
 #students-2 {
     top: 352px;
     left: 490px;
@@ -612,7 +626,7 @@ iframe {
     cursor: pointer;
 }
 
-#courses-dl:hover, #enroll-dl:hover, .record-button2:hover, #my-record2:hover{
+#courses-dl:hover, #enroll-dl:hover {
     background-color: #9F79C7;
 }
 

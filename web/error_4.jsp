@@ -7,6 +7,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+    <% response.setHeader("Pragma", "no-cache"); %>
+    <% response.setDateHeader("Expires", 0); %>
+    <%
+        if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") != null && session.getAttribute("userrole") == "Instructor") {
+            response.sendRedirect("admin_courses.jsp");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") != null && session.getAttribute("userrole") == "Student") {
+            response.sendRedirect("guest_courses.jsp");
+        } else if (session.getAttribute("usernamesession") != null) {
+            response.sendRedirect("CaptchaServlet");
+        }
+    %>
     <head>
         <meta charset="UTF-8">
         <title>Error - Missing Login Credentials</title>

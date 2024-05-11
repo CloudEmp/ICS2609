@@ -7,6 +7,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+    <% response.setHeader("Pragma", "no-cache"); %>
+    <% response.setDateHeader("Expires", 0); %>
+    <%
+        if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") != null && session.getAttribute("userrole") == "Instructor") {
+            response.sendRedirect("admin_courses.jsp");
+        } else if (session.getAttribute("usernamesession") != null && session.getAttribute("captchasession") != null && session.getAttribute("userrole") == "Student") {
+            response.sendRedirect("guest_courses.jsp");
+        } else if (session.getAttribute("usernamesession") != null) {
+            response.sendRedirect("CaptchaServlet");
+        }
+    %>
     <head>
         <meta charset="UTF-8">
         <title>Username Not Found</title>
@@ -29,22 +41,22 @@
 
         <div class="Error-message">
             <h1>Oopss!<h1>
-            <h2>Username Not Found</h2>
-                <p>The username provided does not exist in our system, and the password field is empty.</p>
-                <p>Please make sure you have entered the correct username and password combination.</p>
-        </div>
+                    <h2>Username Not Found</h2>
+                    <p>The username provided does not exist in our system, and the password field is empty.</p>
+                    <p>Please make sure you have entered the correct username and password combination.</p>
+                    </div>
 
-        <!--<div class="container1-login"></div> --->
-        <!-- <div class="container2-login"></div> -->
-        <div class="container3-login">
+                    <!--<div class="container1-login"></div> --->
+                    <!-- <div class="container2-login"></div> -->
+                    <div class="container3-login">
 
-            <form action="index.jsp" method="post">
-                <input type="submit" value="Return">
-            </form>
-        </div>
+                        <form action="index.jsp" method="post">
+                            <input type="submit" value="Return">
+                        </form>
+                    </div>
 
-        <div id="footer"
-            <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
-        </div>
-    </body>
-</html>
+                    <div id="footer"
+                         <p style="font-family: Courier New;"><% out.print(getServletContext().getAttribute("date"));%> <% out.print(getServletContext().getInitParameter("subject")); %> <% out.print(getServletContext().getInitParameter("mp"));%></p>
+                    </div>
+                    </body>
+                    </html>
