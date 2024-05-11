@@ -173,7 +173,7 @@ public class CourseServlet extends HttpServlet {
 
             if (selectedAction.equals("Add")) {
                 if (endDate.compareTo(startDate) >= 0) {
-                    if (!(currentDate.compareTo(startDate) >= 0)) {
+                    if (!(currentDate.compareTo(startDate) > 0)) {
 
                         String countQuery = "SELECT COUNT(*) FROM courses_info WHERE instructor = ?";
                         PreparedStatement countPs = conn.prepareStatement(countQuery);

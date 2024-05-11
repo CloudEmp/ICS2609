@@ -209,7 +209,7 @@
                     <!-- <div class="container2-login"></div> -->
                     <div class="container3-login">
 
-                        <form action="http://localhost:8080/FinalProject/index.jsp" method="post">
+                        <form action="http://localhost:8080/ICS2609/index.jsp" method="post">
                             <input type="submit" value="Return">
                         </form>
                     </div>
